@@ -199,6 +199,17 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+        
+ /**
+  *加入FirePHP
+  */
+ require_once APPPATH.'third_party/FirePHPCore/fb.php';
+ /**
+  * 是否关闭FIREPHP中的错误提示
+  */
+ $firephp = FirePHP::getInstance(true);
+ //$firephp->setEnabled(false);
+        
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
