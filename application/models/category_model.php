@@ -45,8 +45,16 @@
          */
         public function update_info($C_id,$info){
             if(is_array($info)&&  is_numeric($C_id)){
-                $this->db->where('C_id',$C_id)->update('category',$info);
-                return $this->db->affected_rows();
+                if(isset($info['C_adder']))
+                    unset($info['C_adder']);
+                if(isset($info['C_addtime']))
+                    unset($info['C_addtime']);
+                if(count($info)>0){
+                    $this->db->where('C_id',$C_id)->update('category',$info);
+                    return $this->db->affected_rows();
+                }
+                else
+                    return 0;
             }
             else{
                 fb('参数一类型必须是数组,参数二类型必须是整数',FirePHP::TRACE);

@@ -51,9 +51,16 @@
                     $info['U_pw']=$this->encrypt_pw($info['U_pw']);
                 if(isset ($info['U_name']))
                     unset ($info['U_name']);
-                
-                $this->db->where('U_id',$U_id)->update('user',$info);
-                return $this->db->affected_rows();
+                if(isset($info['U_adder']))
+                    unset($info['U_adder']);
+                if(isset($info['U_addtime']))
+                    unset($info['U_addtime']);
+                if(count($info)>0){
+                    $this->db->where('U_id',$U_id)->update('user',$info);
+                    return $this->db->affected_rows();
+                }
+                else
+                    return 0;
             }
             else{
                 fb('参数一输入类型必须是整数，参数二输入类型必须是数组',FirePHP::TRACE);

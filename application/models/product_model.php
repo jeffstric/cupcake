@@ -72,8 +72,17 @@
          */
         public function update_info($P_id,$info){
             if(is_numeric($P_id)){
-               $this->db->where('P_id',$P_id)->update('product',$info);
-               return $this->db->affected_rows();
+                if(isset($info['P_adder']))
+                    unset($info['P_adder']);
+                if(isset($info['P_addtime']))
+                    unset($info['P_addtime']);
+                if(count($info)>0){
+                    $this->db->where('P_id',$P_id)->update('product',$info);
+                    return $this->db->affected_rows();
+                }
+                else {
+                    return 0;
+                }
             }
             else{
                fb('参数类型必须整数',FirePHP::TRACE);
