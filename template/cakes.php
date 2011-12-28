@@ -24,15 +24,15 @@
         <div id="bodyContent">
         	<h2>birthday cake生日蛋糕</h2>
         	<ul>
-            	<li><div><a href="cake_info.htm"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-                <li><div><a href="cake_info.htm"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-                <li><div><a href="cake_info.htm"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
-                <li><div><a href="#"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="#" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
             </ul>
             <div class="pagelist"><a href="#"><b>1</b></a><a href="#">2</a><a href="#">下一页</a></div>
         </div>
