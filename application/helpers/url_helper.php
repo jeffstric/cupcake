@@ -613,7 +613,56 @@ function get_cji($file){
                 break;
         }
 }
-
-
+/**
+ * author:cnbb.com.cn
+ * 作用:返回上传文件地的相对路径
+ **/
+  function get_U($file){
+        $file_info = explode('.', $file);
+        switch($file_info[count($file_info)-1]){
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+            case 'gif':
+                return base_url('/upload/image/'.$file);
+                break;
+        }
+  }
+  function get_nav($info){
+      $result = array();
+      if(is_array($info)){
+          foreach($info as $key=>$value){
+              if($value == 'index')
+                  $result[] = array('name'=>'首页','url'=> site_url() );
+              elseif($value == 'cakes')
+                  $result[] = array('name'=>'蛋糕','url'=> site_url('cakes'));
+              elseif($value == 'about')
+                  $result[] = array('name'=>'关于我们','url'=> site_url('about'));
+              elseif($value == 'contact')
+                  $result[] = array('name'=>'联系我们','url'=>  site_url('contact'));
+              elseif(is_numeric($value)){
+                  $CI = &get_instance();
+                  if($key == 'category'){
+                      $CI->load->model('category_model','C_M',TRUE);
+                      $result[] = $CI->C_M->get_nav($value);
+                  }
+                  elseif($key == 'product'){
+                      $CI->load->model('product_model','P_M',TRUE);
+                      $P = $CI->P_M->get_nav($value);
+                      $result[] = $P['category'];
+                      $result[] = $P['product'];
+                  }
+                  else ;
+              }
+              else ;
+          }
+          return $result;
+      }
+      else{
+          fb('导航函数参数必须是数组',FirePHP::TRACE);
+          return ;
+      }
+          
+  }
 /* End of file url_helper.php */
 /* Location: ./system/helpers/url_helper.php */
