@@ -96,7 +96,7 @@
         public function get_adsence($A_id){
             if(is_numeric($A_id)){
                 $info =$this->select_info($A_id);
-                return array($info->A_img,$info->A_name);
+                return array('img'=>$info->A_img,'name'=>$info->A_name,'url'=>$info->A_url);
             }
             else{
                 fb('参数错误，检查输入类型',FirePHP::TRACE);

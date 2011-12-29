@@ -81,12 +81,30 @@
             if(is_numeric($C_id)){
                 //还需筛选出URL和名称
                 $result = $this->select_info($C_id);
-                return  array('name'=>$result->C_name,'url'=>  site_url('category/'.$result->C_id));
+                if(count($result)>0){
+                    return  array(
+                        'name'=>$result->C_name,
+                        'url'=>site_url('cakes/category/'.$result->C_id)
+                                 );
+                }
+                else
+                    return FALSE;
             }
             else{
                 fb('参数类型必须是是整数',FirePHP::TRACE);
                 show_error('input parm illegal');
             }
+        }
+        
+        public function get_all(){
+            $show =$this->show();
+            foreach($show as $value){
+                $result[]=array(
+                    'name'=>$value->C_name,
+                     'url'=>  site_url('cakes/category/'.$value->C_id)
+                );
+            }
+            return $result;
         }
     }
 ?>

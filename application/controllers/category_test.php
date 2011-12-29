@@ -34,5 +34,8 @@
             if($C_id !=NULL)
                 var_dump($this->C_M->get_nav($C_id));
         }
+        public function get_all(){
+            var_dump($this->C_M->get_all());
+        }
     }
 ?>

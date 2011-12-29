@@ -93,8 +93,11 @@
         public function get_adsence($AS_id){
             if(is_numeric($AS_id)){
                 $this->load->model('adsence_model','A_M');
-                $A_id =$this->select_info($AS_id)->A_id;
-                return $this->A_M->get_adsence($A_id);
+                $A_id =explode(',', $this->select_info($AS_id)->A_id);
+                foreach($A_id as $key =>$value ){
+                    $result[$key]= $this->A_M->get_adsence($value);
+                }    
+                    return $result;
             }
         }
     }

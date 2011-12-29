@@ -52,7 +52,7 @@
                 $this->db->limit($num);
             if($order == 'sort')
                 $this->db->order_by('P_sort','asc');
-            return $this->show();
+             return $this->output($this->show());
         }
         /**
          * 获得首页展示的商品信息
@@ -60,7 +60,7 @@
         public function index_product($num=3){
             if(is_numeric($num)){
                 $this->db->where('P_index',1)->limit($num);
-                return $this->show();
+                return $this->output($this->show());
             }
             else{
                fb('参数类型必须整数',FirePHP::TRACE);
@@ -116,24 +116,65 @@
             }
         }
         /**
+         * 
+         */
+        public function product_show($P_id){
+            if(is_numeric($P_id)){
+                $P = $this->select_info($P_id);
+                return array(
+                        'name'=>$P->P_name,
+                        'url'=>site_url('cake_info/index/'.$P->P_id),
+                        'img'=>$P->P_img,
+                        'des'=>$P->P_des
+                 );
+            }
+            else{
+                fb('参数类型必须整数',FirePHP::TRACE);
+                show_error('input parm illegal'); 
+            }
+        }
+        /**
          * 获得导航信息
          */
         public function get_nav($P_id){
             if(is_numeric($P_id)){
+                $this->load->model('Category_model','C_M');
                 $product =$this->select_info($P_id);
-                $category = array_pop($this->db->where('C_id',$product->P_C_id)->get('category')->result());
-                return array(
-                    'product'=>array(
-                        'name'=>$product->P_name,'url'=>site_url('product/'.$product->P_id)),
-                    'category'=>array(
-                        'name'=>$category->C_name,
-                        'url'=>site_url('category/'.$category->C_id))
-                            );
+                if(count($product)>0){
+                    return array(
+                        'product'=>array(
+                            'name'=>$product->P_name,
+                            'url'=>site_url('cake_info/index/'.$product->P_id)),
+                        'category'=>$this->C_M->get_nav($product->P_C_id)
+                                );
+                }
+                else
+                    return FALSE;
             }
             else{
                fb('参数类型必须整数',FirePHP::TRACE);
                show_error('input parm illegal'); 
             }
+        }
+        /**
+         *处理show()的输出
+         */
+        private function output($show){
+                $this->load->helper('text_helper');
+                foreach ($show as $value){
+                    $result[] = array(
+                       'name'=>$value->P_name,
+                        'url'=>site_url('cake_info/index/'.$value->P_id),
+                        'img'=>$value->P_img,
+                        'tmb'=>$value->P_tmb,
+                        'des'=>utf8Substr($value->P_des,0,32)//显示32个中文字
+                    );
+                }
+                unset($show);
+                if(isset ($result))
+                    return $result;
+                else
+                    return NULL;
         }
         
     }

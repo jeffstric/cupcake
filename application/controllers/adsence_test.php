@@ -13,7 +13,7 @@
             var_dump($this->A_M->show());
         }
         public function add(){
-            $info = array('A_name'=>'蛋糕广告','A_adder'=>'jeff');
+            $info = array('A_name'=>'全局广告一','A_adder'=>'jeff','A_img'=>'4.gif');
             var_dump($this->A_M->add($info));
         }
         public function select($A_id){

@@ -14,22 +14,29 @@
         }
         
         public function add(){
-            $info = array('P_C_id'=>1,'P_name'=>'C1',
-                'P_des'=>'叫我如何解释你？','P_index'=>1,'P_adder'=>'jeff');
+            $info = array('P_C_id'=>1,'P_name'=>'蛋糕六',
+                'P_des'=>'叫我如何解释你？','P_adder'=>'jeff');
             var_dump($this->P_M->add($info));
+            /*
+            for($i = 0;$i<20;$i++){
+                $info = array('P_C_id'=>3,'P_name'=>'西点'.$i,
+                'P_des'=>'叫我如何解释你？','P_adder'=>'jeff');
+                var_dump($this->P_M->add($info));
+            }
+            */
         }
         public function select(){
             var_dump($this->P_M->select_info(1));
         }
-        public function product_show($C_id = NULL,$num = NULL){
-            if(is_numeric($C_id) && is_numeric($num))
-                fb($this->P_M->product_get($C_id,$num));
-            else
-                var_dump($this->P_M->product_get());
+        public function product_get($C_id = NULL,$num = NULL){
+                var_dump($this->P_M->product_get($C_id,$num));
+        }
+        public function product_show($C_id = NULL){
+               var_dump($this->P_M->product_show($C_id));
         }
         public function index_product($num = NULL){
             if(is_numeric($num)){
-                fb($this->P_M->index_product($num));
+                var_dump($this->P_M->index_product($num));
             }
             else{
                 fb($this->P_M->index_product());
@@ -53,7 +60,7 @@
         }
         public function get_nav($P_id){
             if(is_numeric($P_id)){
-                fb($this->P_M->get_nav($P_id));
+                var_dump($this->P_M->get_nav($P_id));
             }
         }
     }
