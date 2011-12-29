@@ -1,28 +1,35 @@
     <div id="navpath">
-    	<div>当前位置：首页 > 关于我们</div>
+    	<div>当前位置：
+            <?foreach($nav as $key => $value):?>
+              <?if($key < count($nav)-1 ):?>
+                <a href="<?=$value['url']?>"><?=$value['name']?></a> >
+              <?else:?>
+                <a href="<?=$value['url']?>"><?=$value['name']?></a>
+              <?endif;?>  
+            <?endforeach;?>
+        </div>
     </div>
     <div class="container">
     	<ul class="banner300">
-        	<li><a href="#"><img src="<?=get_cji('main_p300a.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300b.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300c.gif')?>" /></a></li>
+            <?foreach($global_adsence as $value):?>
+                <li><a href="<?=$value['url']?>"><img src="<?=get_U($value['img'])?>" alt="<?=$value['name']?>" /></a></li>
+            <?endforeach;?>
         </ul>
         <div id="columnLeft">
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>
             <div class="infoBoxContents">
             	<ul>
-                	<li><a href="#">birthday cake</a></li>
-					<li><a href="#">cup cake</a></li>
-                    <li><a href="#">kids cake</a></li>
-                    <li><a href="#">party cake</a></li>
-                    <li><a href="#">wedding cup cake</a></li>
-                    <li><a href="#">wedding tiered cake</a></li>
+                  <?foreach($category as $value):?> 
+                    <li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+                  <?endforeach;?>
                 </ul>
             </div>
         </div>
         <div id="bodyContent">
         	<h2>关于我们</h2>
-        	<div class="infobox"><p>规格尺寸：200mmx300mmx250mm<br />净重：250kg<br />主要成分：鸡蛋、奶油、草莓酱、黄油等<br />圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰圆形鲜奶水果蛋糕，时令水果装饰</p></div>
+        	<div class="infobox">
+                    <?=$content?>
+                </div>
         </div>
     </div>
   	

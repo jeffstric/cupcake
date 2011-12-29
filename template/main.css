@@ -23,7 +23,7 @@ a:active {color: #bc2931;}
 #head ul.menu li a:hover{ color:#1c404e; text-decoration:none;}
 #head ul.menu li.on{ background-image:url(img/greenbg.gif); background-repeat:repeat;}
 #bigp{ float:left;width:100%; height:520px; background-image:url(img/greenbg.gif); background-repeat:repeat;}
-#bigp .bigpin{width: 960px;height:460px;margin: 0 auto; background-image:url(img/bigpbg.gif); padding-top:60px; }
+#bigp .bigpin{width: 960px;height:460px;margin: 0 auto; background-image:url(img/bigpbg.gif); padding-top:60px;padding-top: 40px; }
 #bigp .bigpin .nivo img{ width:900px; height:376px; overflow:hidden;}
 #bigp .bigpin .nivo-control{ display:block; position:relative;width:300px; _width:auto;+width:auto; bottom:-40px; left:400px; z-index:999; font-size:0; line-height:0; }
 #bigp .bigpin .nivo-control a { height:14px; width:14px; background: url("img/cs-buttons.gif") no-repeat scroll 0 0 transparent; cursor: pointer; display: block; margin:0 5px; float:left; position:relative;}
@@ -49,7 +49,7 @@ a:active {color: #bc2931;}
 .container #bodyContent li img{ width:180px; height:140px; border:#FFF 10px solid; overflow:hidden;}
 .container #bodyContent li a:hover img{border:#d0e185 10px solid;}
 .container #bodyContent li h4{ width:200px; color:#1c404e; font-size:16px;font-family:"微软雅黑"; line-height:30px; }
-.container #bodyContent li p{ width:200px; color:#92bcb2;line-height:22px; height:44px; overflow:hidden;}
+.container #bodyContent li #des_p{ width:200px; color:#92bcb2;line-height:22px; height:44px; overflow:hidden;}
 .container #bodyContent li a.more{ font-family:"宋体"; font-size:14px;color:#92bcb2; text-align:right;}
 
 /* 内页样式 */
@@ -64,7 +64,7 @@ a:active {color: #bc2931;}
 .container .pinfo .probigp img{ width:360px; border:#FFF 10px solid;}
 .container .pinfo .ptext{ float:right; width:270px; padding:10px; background-color:#fff;}
 .container .pinfo .ptext h4{ line-height:30px; font-weight:bold; font-size:14px; color:#be5d70;}
-.container .pinfo .ptext p{ line-height:24px;}
+.container .pinfo .ptext .text_p{ line-height:24px;}
 .container .infobox{float:left; width:660px; padding:20px;margin:0 0 10px 20px; background-color:#f6f5f5; display:inline; font-size:14px; line-height:30px;}
 
 /* 底部通用样式 */

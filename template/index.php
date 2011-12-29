@@ -1,33 +1,74 @@
- <div id="bigp">
-   	  <div class="bigpin">
-       	<div class="nivo"><a href="#"><img src="<?=get_cji('bigp1.jpg')?>" /></a></div>
-          <div class="nivo-control"><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a></div>
+    <div id="bigp">
+   	<div class="bigpin">
+            <div id="gallery">
+	
+                <div id="slides">
+
+                <div class="slide"><img src="<?=get_cji('bigp1.jpg')?>" alt="side" /></div>
+                <div class="slide"><img src="<?=get_cji('bigp1.jpg')?>" alt="side" /></div>
+                <div class="slide"><img src="<?=get_cji('bigp1.jpg')?>" alt="side" /></div>
+                <div class="slide"><a href="#" target="_blank"><img src="<?=get_cji('bigp1.jpg')?>" alt="side" /></a></div>
+
+                </div>
+
+                <div id="flash_menu">
+
+                <ul>
+                    <li class="fbar">&nbsp;</li>
+                    <li class="menuItem"><a href=""><img src="<?=get_cji('thumb_about.png')?>" alt="thumbnail" /></a></li>
+                    <li class="menuItem"><a href=""><img src="<?=get_cji('thumb_about.png')?>" alt="thumbnail" /></a></li>
+                    <li class="menuItem"><a href=""><img src="<?=get_cji('thumb_about.png')?>" alt="thumbnail" /></a></li>
+                    <li class="menuItem"><a href=""><img src="<?=get_cji('thumb_about.png')?>" alt="thumbnail" /></a></li>
+                </ul>
+
+
+                </div>
+
+             </div>
+           <!--
+            <div class="nivo"><a href="#"><img src="<?=get_cji('bigp1.jpg')?>" /></a></div>
+            <div class="nivo-control">
+                
+                <a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a>
+            </div>
+           -->
         </div>
     </div>
     <div class="container">
+        <?php
+        /*
+        fb($flash_banner,'$flash_banner');
+        fb($global_adsence,'$global_adsence');
+        fb($Iproduct,'$Iproduct');
+         */
+        ?>
     	<ul class="banner300">
-            <li><a href="#"><img src="<?=get_cji('main_p300a.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300b.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300c.gif')?>" /></a></li>
+            <?foreach($global_adsence as $value):?>
+                <li><a href="<?=$value['url']?>"><img src="<?=get_U($value['img'])?>" alt="<?=$value['name']?>" /></a></li>
+            <?endforeach;?>
         </ul>
         <div id="columnLeft">
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>
             <div class="infoBoxContents">
             	<ul>
-                    <li><a href="#">birthday cake</a></li>
-                    <li><a href="#">cup cake</a></li>
-                    <li><a href="#">kids cake</a></li>
-                    <li><a href="#">party cake</a></li>
-                    <li><a href="#">wedding cup cake</a></li>
-                    <li><a href="#">wedding tiered cake</a></li>
+                  <?foreach($category as $value):?> 
+                    <li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+                  <?endforeach;?>
                 </ul>
             </div>
         </div>
         <div id="bodyContent">
         	<ul>
-            	<li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="cake_info.htm" class="more">查看详细>></a></div></li>
-            </ul>
+                    <?foreach($Iproduct as $value):?>
+                        <li>
+                            <div>
+                                <a href="<?=$value['url']?>"><img src="<?=get_U($value['tmb'])?>" /></a>
+                                <h4><?=$value['name']?></h4>
+                                <p id="des_p"><?=$value['des']?></p>
+                                <a href="<?=$value['url']?>" class="more">查看详细>></a>
+                            </div>
+                        </li>
+                    <?endforeach;?>
+                </ul>
         </div>
     </div>

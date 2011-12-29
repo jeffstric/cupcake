@@ -6,7 +6,13 @@
 <meta name="keywords" content="CupCupCake,蛋糕工作坊" />
 <meta name="Description" content="CupCupCake" />
 <link href="<?=get_cji('main.css')?>" rel="stylesheet" type="text/css" />
+    <?if(isset($load_css)):?>
+<link href="<?=get_cji($load_css)?>" rel="stylesheet" type="text/css" />       
+    <?endif;?>
 <script type="text/javascript" src="<?=get_cji('jQuery_min.js')?>"></script>
+    <?if(isset($load_js)):?>
+<script type="text/javascript" src="<?=get_cji($load_js)?>"></script>
+    <?endif;?>
 </head>
 
 <body>

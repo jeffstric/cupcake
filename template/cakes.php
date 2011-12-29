@@ -1,38 +1,46 @@
 
     <div id="navpath">
-    	<div>当前位置：首页 > 蛋糕 > 杯形蛋糕</div>
+    	<div>当前位置：
+            <?foreach($nav as $key => $value):?>
+              <?if($key < count($nav)-1 ):?>
+                <a href="<?=$value['url']?>"><?=$value['name']?></a> >
+              <?else:?>
+                <a href="<?=$value['url']?>"><?=$value['name']?></a>
+              <?endif;?>  
+            <?endforeach;?>
+        </div>
     </div>
     <div class="container">
     	<ul class="banner300">
-        	<li><a href="#"><img src="<?=get_cji('main_p300a.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300b.gif')?>" /></a></li>
-            <li><a href="#"><img src="<?=get_cji('main_p300c.gif')?>" /></a></li>
+            <?foreach($global_adsence as $value):?>
+                <li><a href="<?=$value['url']?>"><img src="<?=get_U($value['img'])?>" alt="<?=$value['name']?>" /></a></li>
+            <?endforeach;?>
         </ul>
         <div id="columnLeft">
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>
             <div class="infoBoxContents">
             	<ul>
-                	<li><a href="#">birthday cake</a></li>
-					<li><a href="#">cup cake</a></li>
-                    <li><a href="#">kids cake</a></li>
-                    <li><a href="#">party cake</a></li>
-                    <li><a href="#">wedding cup cake</a></li>
-                    <li><a href="#">wedding tiered cake</a></li>
+                  <?foreach($category as $value):?> 
+                    <li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+                  <?endforeach;?>
                 </ul>
             </div>
         </div>
         <div id="bodyContent">
-        	<h2>birthday cake生日蛋糕</h2>
-        	<ul>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
-                <li><div><a href="<?=site_url('cake_info')?>"><img src="<?=get_cji('lspic2.jpg')?>" /></a><h4>倾城之恋 (婚宴多层蛋糕)</h4><p>圆形鲜奶水果蛋糕，时令水果装饰</p><a href="<?=site_url('cake_info')?>" class="more">查看详细>></a></div></li>
+            <h2>所有商品</h2>
+            <ul>
+                <?if(($products)!=NULL):?>
+                    <?foreach($products as $value):?>
+                        <li>
+                            <div>
+                                <a href="<?=$value['url']?>"><img src="<?=get_U($value['tmb'])?>" /></a>
+                                <h4><?=$value['name']?></h4>
+                                <p id="des_p"><?=$value['des']?></p>
+                                <a href="<?=$value['url']?>" class="more">查看详细>></a>
+                            </div>
+                        </li>
+                    <?endforeach;?>
+                  <?endif;?>
             </ul>
             <div class="pagelist"><a href="#"><b>1</b></a><a href="#">2</a><a href="#">下一页</a></div>
         </div>
