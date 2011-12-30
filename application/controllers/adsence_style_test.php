@@ -28,8 +28,8 @@
         public function delete($AS_id){
             var_dump($this->AS_M->delete_info($AS_id));
         }
-        public function get_adsence($AS_id){
-            var_dump($this->AS_M->get_adsence($AS_id));
+        public function get_adsence(){
+            var_dump($this->AS_M->get_adsence(array('a'=>1,'b'=>2) ));
         }
     }
 ?>

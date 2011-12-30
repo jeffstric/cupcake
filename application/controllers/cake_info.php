@@ -16,10 +16,12 @@
             $this->load->model('product_model','P_M');
             $info = array(
                        'menu_on'=>2,
-                'global_adsence'=>$this->AS_M->get_adsence(2),
                       'category'=>$this->C_M->get_all(),
                        'product'=>$this->P_M->product_show($P_id),
-                           'nav'=>$nav
+                           'nav'=>$nav,
+                        'banner'=>$this->AS_M->get_adsence( 
+            array('global_ad1'=>2,'global_ad2'=>3,'global_ad3'=>3) 
+                                ),
             );
             $this->load->view('header',$info);
             $this->load->view('cake_info');

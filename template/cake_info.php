@@ -12,10 +12,31 @@
     </div>
     <div class="container">
     	<ul class="banner300">
-            <?foreach($global_adsence as $value):?>
-                <li><a href="<?=$value['url']?>"><img src="<?=get_U($value['img'])?>" alt="<?=$value['name']?>" /></a></li>
-            <?endforeach;?>
-        </ul>
+           <?if(isset($banner->global_ad1)):?>
+             <li>
+              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
+                <a href="<?=$banner->global_ad1['0']['url']?>">
+                   <img src="<?=get_U($banner->global_ad1['0']['img'])?>" alt="<?=$banner->global_ad1['0']['name']?>" />
+                </a>
+             </li>
+           <?endif;?>
+           <?if(isset($banner->global_ad2)):?>
+             <li>
+              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
+                <a href="<?=$banner->global_ad2['0']['url']?>">
+                   <img src="<?=get_U($banner->global_ad2['0']['img'])?>" alt="<?=$banner->global_ad2['0']['name']?>" />
+                </a>
+             </li>
+           <?endif;?>
+           <?if(isset($banner->global_ad3)):?>
+             <li>
+              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
+                <a href="<?=$banner->global_ad3['0']['url']?>">
+                   <img src="<?=get_U($banner->global_ad3['0']['img'])?>" alt="<?=$banner->global_ad3['0']['name']?>" />
+                </a>
+             </li>
+           <?endif;?>
+         </ul>
         <div id="columnLeft">
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>
             <div class="infoBoxContents">

@@ -15,10 +15,11 @@
                      'menu_on'=>0,
                     'load_css'=>'gallery.css',
                      'load_js'=>'gallery.js',
-                'flash_banner'=>$this->AS_M->get_adsence(1),
-              'global_adsence'=>$this->AS_M->get_adsence(2),
                     'category'=>$this->C_M->get_all(),
-                    'Iproduct'=>$this->P_M->index_product()
+                    'Iproduct'=>$this->P_M->index_product(),
+                      'banner'=>$this->AS_M->get_adsence( 
+     array('flash_ad'=>1,'global_ad1'=>2,'global_ad2'=>3,'global_ad3'=>3) 
+                                )
                    );
             $this->load->view('header',$info);
             $this->load->view('index');
