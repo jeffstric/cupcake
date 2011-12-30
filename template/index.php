@@ -25,23 +25,9 @@
                 </div>
 
              </div>
-           <!--
-            <div class="nivo"><a href="#"><img src="<?=get_cji('bigp1.jpg')?>" /></a></div>
-            <div class="nivo-control">
-                
-                <a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a>
-            </div>
-           -->
         </div>
     </div>
     <div class="container">
-        <?php
-        /*
-        fb($flash_banner,'$flash_banner');
-        fb($global_adsence,'$global_adsence');
-        fb($Iproduct,'$Iproduct');
-         */
-        ?>
     	<ul class="banner300">
             <?foreach($global_adsence as $value):?>
                 <li><a href="<?=$value['url']?>"><img src="<?=get_U($value['img'])?>" alt="<?=$value['name']?>" /></a></li>

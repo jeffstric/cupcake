@@ -42,7 +42,16 @@
                     <?endforeach;?>
                   <?endif;?>
             </ul>
-            <div class="pagelist"><a href="#"><b>1</b></a><a href="#">2</a><a href="#">下一页</a></div>
+            <?if( $pagenum>0 && isset($pagelist_url)):?>
+            <div class="pagelist">
+                <?for($i=0;$i<$pagenum;$i++):?>
+                    <a href="<?=site_url($pagelist_url.$i)?>"><b><?=($i+1)?></b></a>
+                <?endfor;?>
+                <?if(isset($page) ):?> 
+                    <a href="<?=site_url($pagelist_url.($page+1) )?>">下一页</a>
+                <?endif;?>
+            </div>
+            <?endif;?>
         </div>
     </div>
   	

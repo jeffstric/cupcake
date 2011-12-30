@@ -62,7 +62,7 @@
 
 #flash_menu li.inact:hover{
 	/* The inactive state, highlighted on mouse over */
-	background:url(img/pic_bg.png) repeat;
+	/*background:url(img/pic_bg.png) repeat;*/
 }
 
 #flash_menu li.act,li.act:hover{
