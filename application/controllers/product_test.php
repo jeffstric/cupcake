@@ -28,8 +28,8 @@
         public function select(){
             var_dump($this->P_M->select_info(1));
         }
-        public function product_get($C_id = NULL,$num = NULL){
-                var_dump($this->P_M->product_get($C_id,$num));
+        public function product_get($C_id = 0,$page = NULL){
+                var_dump($this->P_M->product_get($C_id,$page));
         }
         public function product_show($C_id = NULL){
                var_dump($this->P_M->product_show($C_id));
@@ -41,6 +41,9 @@
             else{
                 fb($this->P_M->index_product());
             }
+        }
+        public function get_num($C){
+                var_dump($this->P_M->page_num($C));
         }
         public function update_info($P_id = NULL){
             if(is_numeric($P_id)){

@@ -43,13 +43,17 @@
             return $this->db->get('product')->result();
         }
         /**
-         * 获得对应分类的N个商品信息
+         *
+         * @param int $C_id 分类ID，输入0获得所有分类
+         * @param int $page 第几页 输入NULL获得所有page
+         * @param string $order 排序方式 输入非sort可以按照ID排序
+         * @return array 
          */
-        public function product_get($C_id = NULL,$num = NULL,$order='sort'){
-            if(is_numeric($C_id))
+        public function product_get($C_id = 0,$page = NULL,$order='sort'){
+            if(is_numeric($C_id) && $C_id > 0 )
                 $this->db->where('P_C_id',$C_id);
-            if(is_numeric($num))
-                $this->db->limit($num);
+            if(is_numeric($page) && $page >-1)
+                $this->db->limit(9,$page*9);
             if($order == 'sort')
                 $this->db->order_by('P_sort','asc');
              return $this->output($this->show());
@@ -155,6 +159,11 @@
                fb('参数类型必须整数',FirePHP::TRACE);
                show_error('input parm illegal'); 
             }
+        }
+        public function page_num($P_C_id = 0){
+            if(is_numeric($P_C_id) && $P_C_id > 0)
+                $this->db->where('P_C_id',$P_C_id);
+            return floor(($this->db->count_all_results('product')-1)/9)+1;
         }
         /**
          *处理show()的输出

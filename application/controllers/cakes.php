@@ -10,17 +10,23 @@
             $this->load->model('category_model','C_M');
             $this->load->model('product_model','P_M');
         }
-        public function index(){
+        public function index($page = 0){
             $info = array(
-                     'products'=>$this->P_M->product_get(),
-                          'nav'=>get_nav(array('index','cakes'))
+                     'products'=>$this->P_M->product_get(0,$page),
+                          'nav'=>get_nav(array('index','cakes')),
+                 'pagelist_url'=>'cakes/index/',
+                      'pagenum'=>$this->P_M->page_num(),
+                         'page'=>$page
                    );
             $this->load_view('cakes', $info);
         }
-        public function category($C_id){
+        public function category($C_id,$page = 0){
             $info = array(
-                     'products'=>$this->P_M->product_get($C_id),
-                          'nav'=>get_nav(array('index','cakes','category'=>$C_id))
+                     'products'=>$this->P_M->product_get($C_id,$page),
+                          'nav'=>get_nav(array('index','cakes','category'=>$C_id)),
+                 'pagelist_url'=>'cakes/category/'.$C_id.'/',
+                      'pagenum'=>$this->P_M->page_num($C_id),
+                         'page'=>$page
                    );
             $this->load_view('cakes', $info);
         }
