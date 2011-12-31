@@ -85,9 +85,9 @@
          */
         public function name_pw_check($name,$pw){
             if(is_string($name) && is_string($pw)){
-                if($this->encrypt_pw($pw) == $this->db->select('U_pw')
-                        ->where('U_name',$name)->get('user')->row()->U_pw)
-                    return TRUE;
+                $user_info = $this->db->where('U_name',$name)->get('user')->row();
+                if($this->encrypt_pw($pw) == @$user_info->U_pw)
+                    return $user_info->U_id;
                 else
                     return FALSE;
             }

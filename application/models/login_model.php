@@ -37,6 +37,15 @@
                 show_error('input parm illegal');
             }
         }
+        public function select_byS($L_S_id){
+            if(is_string($L_S_id)){
+                return $this->db->where('L_S_id',$L_S_id)->get('login')->row();
+            }
+            else{
+                fb('输入类型必须为字符形',FirePHP::TRACE);
+                show_error('input parm illegal');
+            }
+        }
         /**
          * 获得所有登录信息
          */
@@ -75,13 +84,54 @@
             }
         }
         /**
+         * 登陆系统
+         * @param int $L_U_id
+         * @return string 
+         */
+        public function login($L_U_id){
+            //删除数据
+            $this->delete_info($L_U_id);
+            //生成钥匙    
+            $unique_key = uniqid(rand(0, 999),true);
+            //将钥匙存入会话
+            $this->session->set_userdata(array('unique'=>$unique_key));
+            
+            $info = array(
+                    'L_U_id'=>$L_U_id,
+                    'L_S_id'=>$this->session->userdata('session_id'),
+                  'L_unique'=>$unique_key,
+                    'L_time'=>time()
+                );
+            //将信息存入login表
+            $this->add($info);
+            
+            return date('Y-m-d H:i:s',(time()+$this->config->config['sess_expiration']) );
+        }
+        /**
+         * 注销登陆
+         * @return int 
+         */
+        public function sign_out(){
+            $this->load->library('session');
+            $L_U_id = @$this->select_byS($this->session->userdata('session_id'))->L_U_id;
+            //删除CI会话中的数据
+            $this->session->sess_destroy();
+            //删除login表中的数据
+            if($L_U_id != FALSE)    
+                return $this->delete_info($L_U_id);
+            return 0;
+        }
+        /**
          * 验证会话内的钥匙与login对应信息的钥匙是否相同
          * @param integer $L_U_id
          * @param string $key 
          */
-        public function check_S($L_U_id,$key){
-            if(is_numeric($L_U_id) && is_string($key)){
-                if($key == $this->select_info($L_U_id)->L_unique)
+        public function check_S(){
+            $this->load->library('session');
+            $L_S_id = $this->session->userdata('session_id');
+            $key = $this->session->userdata('unique');
+            if( is_string($key) ){
+                if($key == $this->select_byS($L_S_id)->L_unique)
                     return TRUE;
                 else
                     return FALSE;
@@ -98,7 +148,10 @@
          */
         public function Check_time($L_U_id){
             if(is_numeric($L_U_id)){
-                if(time()-($this->select_info($L_U_id)->L_time) > 1440)
+                //登陆过期时间与配置文件中会话过期时间一致
+                if(time()-($this->select_info($L_U_id)->L_time) > 
+                    $this->config->config['sess_expiration']      
+                  )
                         return FALSE;
                 else
                         return TRUE;

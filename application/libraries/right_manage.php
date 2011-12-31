@@ -3,7 +3,7 @@
 /*
  * author cnbb.com.cn
  */
-    class Admin_right{
+    class Right_manage{
             protected $num;
             protected $places;
         
