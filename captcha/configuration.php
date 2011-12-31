@@ -1,0 +1,29 @@
+<?
+$CSize = 0;
+$CSizeWidth = 150;
+$CSizeHeight = 50;
+$CSrc = 'abcdefghijkmnpqrstuvwxyz23456789';
+$CType = 0;
+$CMinSize = 4;
+$CMaxSize = 4;
+$CBackgroundType = 0;
+$CBackgroundColor = '#FFFFFF';
+$CBackgroundFile = './stones.gif';
+$CBackgroundFillType = 1;
+$CFontUsed = 0;
+$CFontURL = './Dink.ttf';
+$FontNo = 34;
+$fonts_dir = 'fonts';
+$CFontColorType = 3;
+$CFontColor = '#0A268C';
+$CFontSizeMin = 25;
+$CFontSizeMax = 30;
+$CFontRotMin = -15;
+$CFontRotMax = 15;
+$CFontPadding = 2;
+$CNoise = 0;
+$CNoiseType = 0;
+$CNoiseColor = '#FFFFFF';
+$output_type = 'png';
+$captcha_type = 1;
+?>
