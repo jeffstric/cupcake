@@ -350,6 +350,14 @@ class CI_Session {
 
 		// Save the old session id so we know which record to
 		// update in the database if we need it
+                
+                //禁止改变会话ID
+                /**
+                 * 发现CI的会话开启数据库后导致会话莫名的重启，无法读取原来信息，为了实现登录
+                 * 功能，不得不禁用会话ID地改变 2011/12/31
+                 **/
+                
+                /*
 		$old_sessid = $this->userdata['session_id'];
 		$new_sessid = '';
 		while (strlen($new_sessid) < 32)
@@ -365,6 +373,7 @@ class CI_Session {
 
 		// Update the session data in the session data array
 		$this->userdata['session_id'] = $new_sessid;
+                */
 		$this->userdata['last_activity'] = $this->now;
 
 		// _set_cookie() will handle this for us if we aren't using database sessions
@@ -372,18 +381,19 @@ class CI_Session {
 		$cookie_data = NULL;
 
 		// Update the session ID and last_activity field in the DB if needed
-		if ($this->sess_use_database === TRUE)
-		{
-			// set cookie explicitly to only have our session data
-			$cookie_data = array();
-			foreach (array('session_id','ip_address','user_agent','last_activity') as $val)
-			{
-				$cookie_data[$val] = $this->userdata[$val];
-			}
-
-			$this->CI->db->query($this->CI->db->update_string($this->sess_table_name, array('last_activity' => $this->now, 'session_id' => $new_sessid), array('session_id' => $old_sessid)));
-		}
-
+                if ($this->sess_use_database === TRUE)
+                {
+                        // set cookie explicitly to only have our session data
+                        $cookie_data = array();
+                        foreach (array('session_id','ip_address','user_agent','last_activity') as $val)
+                        {
+                                $cookie_data[$val] = $this->userdata[$val];
+                        }
+ 
+                        $this->CI->db->query($this->CI->db->update_string($this->sess_table_name, array('last_activity' => $this->now), array('session_id' => $this->userdata['session_id'])));
+                }
+ 
+                
 		// Write the cookie
 		$this->_set_cookie($cookie_data);
 	}
