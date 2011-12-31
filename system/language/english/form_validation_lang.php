@@ -1,29 +1,25 @@
 <?php
 
-$lang['required']			= "The %s field is required.";
-$lang['isset']				= "The %s field must have a value.";
-$lang['valid_email']		= "The %s field must contain a valid email address.";
-$lang['valid_emails']		= "The %s field must contain all valid email addresses.";
-$lang['valid_url']			= "The %s field must contain a valid URL.";
-$lang['valid_ip']			= "The %s field must contain a valid IP.";
-$lang['min_length']			= "The %s field must be at least %s characters in length.";
-$lang['max_length']			= "The %s field can not exceed %s characters in length.";
-$lang['exact_length']		= "The %s field must be exactly %s characters in length.";
-$lang['alpha']				= "The %s field may only contain alphabetical characters.";
-$lang['alpha_numeric']		= "The %s field may only contain alpha-numeric characters.";
-$lang['alpha_dash']			= "The %s field may only contain alpha-numeric characters, underscores, and dashes.";
-$lang['numeric']			= "The %s field must contain only numbers.";
-$lang['is_numeric']			= "The %s field must contain only numeric characters.";
-$lang['integer']			= "The %s field must contain an integer.";
-$lang['regex_match']		= "The %s field is not in the correct format.";
-$lang['matches']			= "The %s field does not match the %s field.";
-$lang['is_unique'] 			= "The %s field must contain a unique value.";
-$lang['is_natural']			= "The %s field must contain only positive numbers.";
-$lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
-$lang['decimal']			= "The %s field must contain a decimal number.";
-$lang['less_than']			= "The %s field must contain a number less than %s.";
-$lang['greater_than']		= "The %s field must contain a number greater than %s.";
+$lang['required'] 			= "%s 必须填写.";
+$lang['isset']				= "%s 一定要有内容.";
+$lang['valid_email']		= "%s 必须是一个有效的电子邮箱地址.";
+$lang['valid_emails'] 		= "%s 必须是有效的电子邮箱地址.";
+$lang['valid_url'] 			= "%s 必须是有效的网址.";
+$lang['valid_ip'] 			= "%s 必须是一个有效IP地址.";
+$lang['min_length']			= "%s 至少包含 %s 个字.";
+$lang['max_length']			= "%s 不能超过 %s 个字.";
+$lang['exact_length']		= "%s 必须刚好 %s 个字.";
+$lang['alpha']				= "%s 只能包含英文字母.";
+$lang['alpha_numeric']		= "%s 只能包含英文字母或数字.";
+$lang['alpha_dash']			= "%s 只能包含英文字母、数字、下划线、或破折号.";
+$lang['numeric']			= "%s 只能包含数字.";
+$lang['is_numeric']			= "%s 只能包含数字.";
+$lang['integer']			= "%s 只能包含整数.";
+$lang['regex_match']		= "%s 格式不正确.";
+$lang['matches']			= "%s 与 %s 不相符合.";
+$lang['is_natural']			= "%s 必须是自然数(非负整数).";
+$lang['is_natural_no_zero']	= "%s 必须是大于零的自然数(非负整数).";
 
 
 /* End of file form_validation_lang.php */
-/* Location: ./system/language/english/form_validation_lang.php */
+/* Location: ./system/language/chinesesimplified/form_validation_lang.php */
