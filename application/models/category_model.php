@@ -12,7 +12,7 @@
          * 增加分类信息
          */
         public function add($info){
-            if(is_array($info)&& isset($info['C_name']) && isset($info['C_url']) && isset($info['C_adder']) ){
+            if(is_array($info)&& isset($info['C_name']) && isset($info['C_adder']) ){
                 $info['C_addtime'] = time();
                 $this->db->insert('category',$info);
                 return $this->db->insert_id();
@@ -39,6 +39,22 @@
          */
         public function show(){
             return $this->db->get('category')->result();
+        }
+        /**
+         * 获得所有分类的名称与ID
+         **/
+        public function name_id(){
+            return $this->db->select('C_name,C_id')->get('category')->result();
+        }
+        
+        public function id2name(){
+            $result = $this->name_id();
+            $return = array();
+            foreach($result as $value){
+                $return[$value->C_id]= $value->C_name;
+            }
+            unset ($result);
+            return $return;
         }
         /**
          * 修改指定ID的信息
@@ -72,6 +88,21 @@
             else{
                 fb('参数类型必须是是整数',FirePHP::TRACE);
                 show_error('input parm illegal');
+            }
+        }
+        /**
+         * 删除多个ID的信息
+         * @param array $ids
+         * @return tint 
+         */
+        public function delete($ids){
+            if(is_array($ids)){
+                foreach($ids as $value){
+                    if(is_numeric($value))
+                        $this->db->or_where('C_id',$value);
+                }
+                $this->db->delete('category');
+                return $this->db->affected_rows();
             }
         }
         /**

@@ -4,7 +4,7 @@
     </head>
     
     <body>
-        <?=form_open('admin/login')?>
+        <?=form_open('login/index')?>
         <table>
             <tr>
                 <td colspan="2">

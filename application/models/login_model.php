@@ -130,15 +130,17 @@
             $this->load->library('session');
             $L_S_id = $this->session->userdata('session_id');
             $key = $this->session->userdata('unique');
-            if( is_string($key) ){
-                if($key == $this->select_byS($L_S_id)->L_unique)
-                    return TRUE;
+            if(is_string($key) ){
+                $row = $this->select_byS($L_S_id);
+                if($key == $row->L_unique){
+                    $this->load->model('user_model');
+                    return $this->user_model->select_info($row->L_U_id);
+                }
                 else
                     return FALSE;
             }
             else{
-                fb('参数一输入类型必须为整数，参数二为字符串',FirePHP::TRACE);
-                show_error('input parm illegal');
+                return FALSE;
             }
         }
         /**

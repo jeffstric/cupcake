@@ -6,8 +6,12 @@
     class Right_manage{
             protected $num;
             protected $places;
-        
-            public function __construct($num,$places = NULL){
+            
+            public function __construct(){
+                
+            }
+            
+            public function init($num,$places = NULL){
                 if(is_numeric($num)){
                     $this->num = $num;
                     if($places != NULL)
@@ -26,13 +30,22 @@
             }
             
             private function get_R($N){
-                return ($this->num/(pow(2,$N-1)))%2;
+                return ($this->num/(pow(2,$N)))%2;
             }
             private function inverse($N){
+                $num_bak = $this->num;
                 if($this->get_R($N))
-                    $this->num = $this->num-pow(2,$this->places-1);
+                    $this->num = $this->num-pow(2,$N);
                 else
-                    $this->num = $this->num+pow(2,$this->places-1);
+                    $this->num = $this->num+pow(2,$N);
+                if($num_bak == $this->num){
+                    fb('权限未被修改');
+                    return TRUE;
+                }
+                else{
+                    fb('权限已被修改');
+                    return FALSE;
+                }
             }
 
             public function update_R($N,$bool=NULL){
@@ -40,14 +53,14 @@
                 if($bool !=NULL && $bool = R )
                     ;
                 else
-                    $this->inverse($this->num, $this->places);
-                return $this->Result_R();
+                    $this->inverse($N);
+                return $this->num;
             }
 
-            public function Result_R(){
-                $result = array();
+            public function result_R(){
+                $result;
                 for($i = 0 ; $i< $this->places ;$i++){
-                   $result[$i]=$this->get_R($i+1);
+                   $result->$i=$this->get_R($i);
                 }
                 return $result;
             }

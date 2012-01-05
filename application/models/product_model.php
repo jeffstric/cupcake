@@ -119,6 +119,16 @@
                show_error('input parm illegal'); 
             }
         }
+        public function delete($ids){
+            if(is_array($ids)){
+                foreach($ids as $value){
+                    if(is_numeric($value))
+                        $this->db->or_where('P_id',$value);
+                }
+                $this->db->delete('product');
+                return $this->db->affected_rows();
+            }
+        }
         /**
          * 
          */
@@ -160,10 +170,16 @@
                show_error('input parm illegal'); 
             }
         }
+        /**
+         * 获得产品的页数 9个产品一页 
+         */
         public function page_num($P_C_id = 0){
             if(is_numeric($P_C_id) && $P_C_id > 0)
                 $this->db->where('P_C_id',$P_C_id);
             return floor(($this->db->count_all_results('product')-1)/9)+1;
+        }
+        public function max_id(){
+            return $this->db->select_max('P_id')->get('product')->row()->P_id;
         }
         /**
          *处理show()的输出

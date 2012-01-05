@@ -56,7 +56,7 @@
                             <div>
                                 <a href="<?=$value['url']?>"><img src="<?=get_U($value['tmb'])?>" /></a>
                                 <h4><?=$value['name']?></h4>
-                                <p id="des_p"><?=$value['des']?></p>
+                                <p id="des_p"><?=strip_tags($value['des'])?></p>
                                 <a href="<?=$value['url']?>" class="more">查看详细>></a>
                             </div>
                         </li>
