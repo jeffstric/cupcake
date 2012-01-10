@@ -16,10 +16,14 @@
             if(is_array($info) && isset($info['A_name']) && isset($info['A_adder']) ){
                 if(!isset($info['A_sort'])){
                     $max_sort =$this->db->select_max('A_sort')->get('adsence')->row()->A_sort;
-                    fb('A_sort_max',$max_sort);
                     $info['A_sort']=$max_sort+1;
                 }
-                $info['A_addtime']=time();    
+                if( !isset($info['A_addtime']) )
+                    $info['A_addtime']=time();
+                if( !isset($info['A_url']))
+                    $info['A_url'] = '#';
+                if( isset($info['A_img']))
+                    $info['A_img'] = trim($info['A_img']);
                 $this->db->insert('adsence',$info);
                 return $this->db->insert_id();
             }
@@ -88,6 +92,16 @@
                 show_error('input parm illegal');
             }
         }
+        public function delete($ids){
+            if(is_array($ids)){
+                foreach($ids as $value){
+                    if(is_numeric($value))
+                        $this->db->or_where('A_id',$value);
+                }
+                $this->db->delete('adsence');
+                return $this->db->affected_rows();
+            }
+        }
         /**
          * 获得指定ID的广告信息
          * @param integer $A_id
@@ -96,7 +110,8 @@
         public function get_adsence($A_id){
             if(is_numeric($A_id)){
                 $info =$this->select_info($A_id);
-                return array('img'=>$info->A_img,'name'=>$info->A_name,'url'=>$info->A_url);
+                return array('img'=>$info->A_img,'name'=>$info->A_name,
+                             'url'=>$info->A_url,'sort'=>$info->A_sort);
             }
             else{
                 fb('参数错误，检查输入类型',FirePHP::TRACE);

@@ -18,7 +18,7 @@
                     'category'=>$this->C_M->get_all(),
                     'Iproduct'=>$this->P_M->index_product(),
                       'banner'=>$this->AS_M->get_adsence( 
-     array('flash_ad'=>1,'global_ad1'=>2,'global_ad2'=>3,'global_ad3'=>3) 
+     array('flash_ad'=>1,'global_ad1'=>2,'global_ad2'=>3,'global_ad3'=>4) 
                                 )
                    );
             $this->load->view('header',$info);

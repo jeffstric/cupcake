@@ -5,8 +5,9 @@
         <script type="text/javascript" src="<?=get_cji('checkbox.js')?>"></script>
     </head>
     <body>
-       <?=form_open(site_url('admin/product_action'))?>
-            <input type="text" name="checkboxValue" id="checkboxValue"/>
+       <?=form_open(site_url('admin/action'))?>
+            <input type="text" name="object" value="<?=$object?>" hidden="TRUE"/>
+            <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
              <table border="1">
                 <tr>
                     <td colspan ="5">

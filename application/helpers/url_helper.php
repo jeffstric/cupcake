@@ -613,6 +613,23 @@ function get_cji($file){
                 break;
         }
 }
+function admin_cji($file){
+        $file_info = explode('.', $file);
+        switch($file_info[count($file_info)-1]){
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+            case 'gif':
+                return base_url('/template/admin/img/'.$file);
+                break;
+            case 'css':
+                return base_url('/template/admin/img/'.$file);
+                break;
+            case 'js':
+                return base_url('/template/admin/js/'.$file);
+                break;
+        }
+}
 /**
  * author:cnbb.com.cn
  * 作用:返回上传文件地的相对路径
@@ -624,7 +641,7 @@ function get_cji($file){
             case 'jpeg':
             case 'png':
             case 'gif':
-                return base_url('/upload/image/'.$file);
+                return trim(base_url('/upload/image/'.$file));
                 break;
         }
   }

@@ -21,7 +21,7 @@
            else{
                if(is_numeric($this->U_id)){
                     $this->L_M->login($this->U_id);
-                    fb('登陆成功');
+                    header('Location:'.site_url('admin'));
                }     
                else{
                    fb('函数namepw_check没有正确执行',FirePHP::TRACE);

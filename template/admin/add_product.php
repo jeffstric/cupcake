@@ -4,6 +4,11 @@
     </head>
     <body>
         <?=form_open_multipart('admin/'.$destination)?> 
+        <?if(isset($P_id)):?>
+                <div>
+                    <input type="text" name="P_id" value="<?=$P_id?>" hidden="TRUE"/>
+                </div>
+        <?endif;?>
         <div>
             <?=validation_errors()?>
             <?if(isset ($errors)):?>
@@ -16,7 +21,7 @@
             <?endif;?>
         </h5>
         <div>
-            <input type="text" name="name"/>
+            <input type="text" name="name" value="<?=set_value('name')?>"/>
         </div>
         <h5>商品分类
             <?if(isset($product->P_C_name)):?>
@@ -47,7 +52,7 @@
 
             </textarea>
         </div>
-        <h5>产品图片
+        <h5>产品图片(360px*282px)
              <?if(isset($product->P_des)):?>
                 (原图片:<img src=" <?=get_U($product->P_img)?>"/>)
              <?endif;?>
@@ -55,7 +60,7 @@
         <div>
             <input type="file" name="img"/>
         </div>
-        <h5>产品缩略图
+        <h5>产品缩略图(180px*140px)
              <?if(isset($product->P_des)):?>
                 (原图片:<img src=" <?=get_U($product->P_tmb)?>"/>)
              <?endif;?>
@@ -93,11 +98,6 @@
             <input type ="checkbox" name="indexpage" />
            <?endif;?>
         </div>
-            <?if(isset($P_id)):?>
-                <div>
-                    <input type="text" name="P_id" value="<?=$P_id?>"/>
-                </div>
-            <?endif;?>
         <div>
             <input type="submit" value="submit"/>
             <input type="reset" value="reset"/>

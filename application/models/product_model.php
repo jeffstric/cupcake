@@ -3,7 +3,7 @@
 /*
  * author cnbb.com.cn
  */
-    class Product_model extends CI_Controller{
+    class Product_model extends CI_Model{
         public function __construct() {
             parent::__construct();
         }
@@ -13,7 +13,12 @@
         public function add($info){
             if(is_array($info) && isset($info['P_C_id']) && is_numeric($info['P_C_id'])
                && isset($info['P_name']) && isset($info['P_adder']) ){
-                $info['P_addtime'] = time();
+                if(!isset($info['P_addtime']))
+                    $info['P_addtime'] = time();
+                if( isset($info['P_img']))
+                    $info['P_img'] = trim($info['P_img']);
+                if( isset($info['P_tmb']))
+                    $info['P_tmb'] = trim($info['P_tmb']);
                 if(!isset ($info['P_sort']))
                     $info['P_sort'] =$this->db->select_max('P_sort')->get('product')->row()->P_sort+1;
                 $this->db->insert('product',$info);

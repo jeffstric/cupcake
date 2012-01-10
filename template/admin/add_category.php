@@ -7,6 +7,9 @@
         <?=form_open('admin/'.$destination)?> 
         <div>
             <?=validation_errors()?>
+            <?if(isset ($errors)):?>
+                <?=$errors?>
+            <?endif;?>
         </div>
         <h5>分类名称
           <?if(isset ($name_pre)):?>
@@ -21,7 +24,7 @@
         </h5>
         <input type="text" name="des" value="<?=set_value('des')?>"/>
         <?if(isset($C_id)):?>
-            <input type="text" name="C_id" value="<?=$C_id?>"/>
+            <input type="text" name="C_id" value="<?=$C_id?>" hidden="TRUE"/>
         <?endif;?>
         <div>
             <input type="submit" value="submit"/>

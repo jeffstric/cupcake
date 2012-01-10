@@ -6,7 +6,9 @@
         <script type="text/javascript" src="<?=get_cji('checkbox.js')?>"></script>
     </head>
     <body>
-        <?=form_open(site_url('admin/category_action'))?>
+        <?=form_open(site_url('admin/action'))?>
+        <input type="text" name="object" value="<?=$object?>" hidden="TRUE"/>
+        <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
         <table border="1">
             <tr>
                 <th>分类名称</th>
@@ -39,6 +41,5 @@
                 </tr>
             <?endif;?>
         </table>
-        <input type="text" name="checkboxValue" id="checkboxValue"/>
     </body>
 </html>

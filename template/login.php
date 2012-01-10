@@ -5,7 +5,17 @@
     
     <body>
         <?=form_open('login/index')?>
-        <table>
+        <table style="text-align: center;width:300px;diaplay:block;margin:0 auto;margin-top: 170px;">
+            <tr>
+                <td colspan="2">
+                    <img src="<?=get_cji('logo.gif')?>"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    欢迎光临cupcupcake后台管理系统
+                </td>
+            </tr>
             <tr>
                 <td colspan="2">
                     <?=validation_errors()?>
@@ -16,7 +26,7 @@
                     用户名
                 </td>
                 <td>
-                    <input type="text" name="name" />
+                    <input type="text" name="name" value="<?=set_value('name')?>" />
                 </td>
             </tr>
             <tr>

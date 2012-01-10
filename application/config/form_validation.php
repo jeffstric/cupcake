@@ -58,5 +58,12 @@
                                 'rules' =>'required|numeric'
                             )
                         ),
+   'add_adsence'=>array(
+                        array(
+                                'field' =>'name',
+                                'label' =>'广告名称',
+                                'rules' =>'required|min_length(1)'
+                            )
+                       )
                  );
 ?>

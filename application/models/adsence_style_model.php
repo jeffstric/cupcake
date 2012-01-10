@@ -85,48 +85,28 @@
             }
                 
         }
-        /**
-         * 获得指定ID广告样式引用的广告信息
-         * @param array $info
-         * @return array 
-         */
+        
         public function get_adsence($info){
-            $result;
+            $result = NULL;
             foreach($info as $key=>$value){
                 if( is_numeric($value) ){
                     $this->load->model('adsence_model','A_M');
                     $A_info =  @$this->select_info($value)->A_id;
                     if($A_info !=NULL){
                         $A_id =explode(',',$A_info);
-                        foreach($A_id as $K =>$V ){
-                             $adesnce[$K] = $this->A_M->get_adsence($V);
+                        foreach($A_id as $V ){
+                             $this->db->or_where('A_id',$V);
                         }
-                        $result->$key = $adesnce;
+                        $R = $this->db->select('A_id as id,A_img as img,A_name as name,A_url as url')
+                                  ->order_by('A_sort')->get('adsence')
+                                  ->result_array();
+                        
+                        $result->$key = $R;
                     }
                 }
             }
             return $result;
         }
-        /*
-        public function get_adsence(){
-            $arg_num = func_num_args();
-            $result = array();
-            for($i = 0 ;$i < $arg_num ; $i++){
-                $arg = func_get_arg($i);
-                if( is_numeric($arg) ){
-                    $this->load->model('adsence_model','A_M');
-                    $A_info =  $this->select_info($arg)->A_id;
-                    if($A_info !=NULL){
-                        $A_id =explode(',',$A_info);
-                        foreach($A_id as $key =>$value ){
-                             $adesnce->$key = $this->A_M->get_adsence($value);
-                        }
-                        $result[] = $adesnce;
-                    }
-                }
-            }
-            return $result;
-        }
-         */
+        
     }
 ?>
