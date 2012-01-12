@@ -57,6 +57,8 @@
                                         </li>
                                         <li><a target="main" href="<?=site_url('admin/adsence_manage')?>">广告浏览与管理</a>
                                         </li>
+                                        <li><a target="main" href="<?=site_url('admin/adsence_style_add')?>">广告位添加</a>
+                                        </li>
                                         <li><a target="main" href="<?=site_url('admin/adsence_style_manage')?>">广告位浏览与管理</a>
                                         </li>
                                     </ul>

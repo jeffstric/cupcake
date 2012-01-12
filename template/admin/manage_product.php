@@ -38,8 +38,8 @@
                         <td><?=$value->P_name?></td>
                         <td><?=$value->P_C_name?></td>
                         <td><?=$value->P_des?></td>
-                        <td><img src=" <?=get_U($value->P_img)?>"/></td>
-                        <td><img src=" <?=get_U($value->P_tmb)?>"/></td>
+                        <td><img width="181" height="142" src=" <?=get_U($value->P_img)?>"/></td>
+                        <td><img width="181" height="142" src=" <?=get_U($value->P_tmb)?>"/></td>
                         <td><?=$value->P_sort?></td>
                         <td>
                             <?if($value->P_index):?>

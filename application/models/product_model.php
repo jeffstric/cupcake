@@ -55,10 +55,16 @@
          * @return array 
          */
         public function product_get($C_id = 0,$page = NULL,$order='sort'){
-            if(is_numeric($C_id) && $C_id > 0 )
-                $this->db->where('P_C_id',$C_id);
-            if(is_numeric($page) && $page >-1)
-                $this->db->limit(9,$page*9);
+            if(is_numeric($C_id) && $C_id > 0 ){
+                $this->load->model('category_model','C_M');
+                $child = $this->C_M->child_id($C_id);
+                
+                $this->db->or_where('P_C_id',$C_id);
+                foreach($child as $value)
+                    $this->db->or_where('P_C_id',$value);
+            }
+            if(is_numeric($page) && $page >0)
+                $this->db->limit(9,($page-1)*9);
             if($order == 'sort')
                 $this->db->order_by('P_sort','asc');
              return $this->output($this->show());

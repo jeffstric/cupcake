@@ -45,23 +45,29 @@
          * 分类管理开始
          ***/
         public function category_add(){
+            $info = array();
             if($this->form_validation->run('add_category')){
                 $this->load->model('category_model','C_M');
                 $info = array(
                     'C_name'=>$this->input->post('name'),
-                    'C_des'=>$this->input->post('des'),
-                    'C_addtime'=>time(),
-                    'C_adder'=>$this->U->U_name
+                     'C_des'=>$this->input->post('des'),
+                 'C_addtime'=>time(),
+                   'C_adder'=>$this->U->U_name
                 );
                 $info['errors'] = '添加成功，插入ID为'.$this->C_M->add($info);
             }
-                $info['destination'] = __FUNCTION__;
-                $this->load->view('admin/add_category',$info);
+            $info = $info + array(
+                  'destination' => __FUNCTION__,
+                    'categories'=>$this->get_category_name()
+            );
+            $this->load->view('admin/add_category',$info);
         }
         public function category_manage(){
             $this->load->model('category_model','C_M');
+            $this->C_M->get_menulist(0,$treelist);
             $info = array(
-                'categories' => $this->C_M->show(),
+                'categories' => $treelist,
+                         'C' =>$this->get_category_name(),
                 'object'     => 'category'
                          );
             $this->load->view('admin/manage_category',$info);
@@ -80,12 +86,10 @@
         public function category_update($id){
             if(is_numeric($id)){
                 $this->load->model('category_model','C_M');
-                $C = $this->C_M->select_info($id);
                 $info = array(
                  'destination'=>'category_update_process',
-                    'name_pre'=>$C->C_name,
-                    'des_pre' =>$C->C_des,
-                    'C_id'    =>$C->C_id
+                    'category'=>$this->C_M->select_info($id),
+                  'categories'=>$this->get_category_name()
                 );
                 $this->load->view('admin/add_category',$info);
             }
@@ -103,6 +107,8 @@
                     $info['C_name'] = $name;
                 if(is_string($des) && $des != FALSE)
                     $info['C_des'] = $des;
+                if(is_numeric($this->input->post('category') ) )
+                    $info['C_parent']=$this->input->post('category');
                 if(count(@$info)>0){
                     $this->load->model('category_model','C_M');
                     $this->C_M->update_info($C_id,$info);
@@ -366,16 +372,25 @@
          ***/
         public function adsence_style_manage(){
             $this->load->model('adsence_style_model','AS_M');
+            
+            $num = $this->AS_M->count();
+            $img = array();
+            for($i = 0 ; $i < $num ; $i++){
+                $img[]=($i+1);
+            }
+            
             $info = array(
                 'styles' => $this->AS_M->show(),
                 'object' => 'adsence_style',
-                'img'    => $this->AS_M->get_adsence(array(1,2,3,4))
+                'img'    => $this->AS_M->get_adsence($img)
             );
             $this->load->view('admin/manage_adsence_style',$info);
         }
         public function adsence_style_update($id,$errors = NULL){
             $this->load->model('adsence_style_model','AS_M');
+            $this->load->model('adsence_model','A_M');
             $info = array(
+               'adsences' => $this->A_M->show(),
                   'style' => $this->AS_M->select_info($id),
                     'img' => $this->AS_M->get_adsence(array('result'=>$id)),
                      'id' => $id,
@@ -388,8 +403,9 @@
         public function adsence_style_upload_process(){
             $id = $this->input->post('id');
             if( $id && is_numeric($id)){ 
+               $info = array();
                if($this->input->post('A_id')){
-                   $info['A_id']= str_replace('，', ',', $this->input->post('A_id')); 
+                   $info['A_id']= trim(str_replace('，', ',', $this->input->post('A_id'))); 
                }
                if($this->input->post('name')){
                    $info['AS_name'] = $this->input->post('name');
@@ -400,12 +416,43 @@
                if(count($info)>0){
                    $this->load->model('adsence_style_model','AS_M');
                    $this->AS_M->update_info($id,$info);
-                   header('Location:'.site_url('adsence_style_manage'));
+                   header('Location:'.site_url('admin/adsence_style_manage'));
                }
             }
             else{
                fb('输入的ID非整数',  FirePHP::TRACE);
                $this->error_show('错误',$object.'_manage');
+            }
+        }
+        public function adsence_style_add(){
+            $info = array();
+            if($this->form_validation->run('add_adsence_style')){
+                $this->load->model('adsence_style_model','AS_M');
+                $insert = array(
+                    'AS_name' => $this->input->post('name'),
+                    'AS_des'  => $this->input->post('des'),
+                    'A_id'    => $this->input->post('A_id'),
+                    'AS_adder'=> $this->U->U_name
+                );
+                $insert_id = $this->AS_M->add($insert);
+                $info = array('errors' =>'插入成功，ID为'.$insert_id);
+            }
+            $this->load->model('adsence_model','A_M');
+                $info = array_merge($info,array(
+                    'adsences' => $this->A_M->show(),
+                  'destination'=> __FUNCTION__
+             ));
+            $this->load->view('admin/add_adsence_style',$info);
+        }
+        public function adsence_style_delete($ids){
+            if(is_array($ids)){
+                $this->load->model('adsence_style_model','AS_M');
+                $this->AS_M->delete($ids);
+                header('Location:'.site_url('admin/adsence_style_manage'));
+            }
+            else{
+                fb('参数类型错误',  FirePHP::TRACE);
+                show_error('输入类型错误');
             }
         }
         /***
@@ -455,7 +502,9 @@
          */
         protected function get_category_name(){
             $this->load->model('category_model');
-            return $this->category_model->id2name();
+            $result = $this->category_model->id2name();
+            $result[0] = '无';
+            return $result;
         }
         
         /**
@@ -498,8 +547,6 @@
             $config['upload_path'] = './upload/image/';
             $config['allowed_types'] = 'gif|jpg|jpeg|png';
             $config['max_size'] = '120';
-            $config['max_width'] = '500';
-            $config['max_height'] = '400';
             $config['file_name'] = time().rand(100, 999);
             $this->load->library('upload', $config);
             if($this->upload->do_upload($name))
@@ -565,6 +612,5 @@
         /***
          * 视图函数结束
          ***/
-        
     }
 ?>

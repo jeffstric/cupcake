@@ -13,7 +13,10 @@
          */
         public function add($info){
             if(is_array($info)&& isset($info['C_name']) && isset($info['C_adder']) ){
-                $info['C_addtime'] = time();
+                if(!isset($info['C_addtime']))
+                    $info['C_addtime'] = time();
+                if(!isset($info['C_parent']))
+                    $info['C_parent'] = 0;
                 $this->db->insert('category',$info);
                 return $this->db->insert_id();
             }
@@ -65,6 +68,9 @@
                     unset($info['C_adder']);
                 if(isset($info['C_addtime']))
                     unset($info['C_addtime']);
+                if(isset($info['C_parent']) && !is_numeric($info['C_parent']))
+                    unset($info['C_parent']);
+                    
                 if(count($info)>0){
                     $this->db->where('C_id',$C_id)->update('category',$info);
                     return $this->db->affected_rows();
@@ -137,5 +143,52 @@
             }
             return $result;
         }
+        /**
+         *  通过递归获得输入分类下的所有子分类
+         * @param int $P_id
+         * @param array $result 
+         * @return $array $result
+         */
+        public function child_id($P_id,$result = NULL){
+               
+            if(!is_array($result))
+                $result = array();
+            
+            $query = $this->db->select('C_id')->where('C_parent',$P_id)->get('category')->result();
+            
+            foreach ($query as  $value) {
+                array_push($result,$value->C_id );
+                $result = $this->child_id($value->C_id, $result);
+            }
+            return $result;
+        }
+        /*
+        public function get_menulist($parent_id,&$treelist,$floor=0){
+            $result = $this->db->where('C_parent',$parent_id)->get('category')->result();
+            foreach($result as $value){
+                
+                
+                for($i=0;i<$floor;$i++){
+                    $space.="　";
+                }
+                $treelist[]=array('id'=>$value->C_id,);
+                $this->get_menulist($treelist,$value->C_id, $floor++);
+            }
+        }
+         */
+        public function get_menulist($parent_id,&$treelist,$floor = 0){
+            if($treelist == NULL)
+                $treelist = array();
+            $result = $this->db->where('C_parent',$parent_id)->get('category')->result();
+            foreach($result as $value){
+                for($i = 0 ; $i < $floor ; $i++)
+                    $value->C_name='　'.$value->C_name;
+                
+                array_push($treelist,$value);
+                
+                $this->get_menulist($value->C_id,$treelist,$floor+1);
+            }
+        }
+        
     }
 ?>

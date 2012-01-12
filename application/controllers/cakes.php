@@ -20,7 +20,7 @@
                    );
             $this->load_view('cakes', $info);
         }
-        public function category($C_id,$page = 0){
+        public function category($C_id,$page = 1){
             $info = array(
                      'products'=>$this->P_M->product_get($C_id,$page),
                           'nav'=>get_nav(array('index','cakes','category'=>$C_id)),

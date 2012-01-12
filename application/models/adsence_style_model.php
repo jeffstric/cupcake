@@ -14,7 +14,8 @@
          * @return integer 
          */
         public function add($info){
-            if(is_array($info) && isset($info['A_id']) && isset($info['AS_adder'])){
+            if(is_array($info) && isset($info['AS_adder'])){
+                $info['A_id'] = trim($info['A_id']);
                 $info['AS_addtime']=time();
                 $this->db->insert('adsence_style',$info);
                 return $this->db->insert_id();
@@ -85,7 +86,19 @@
             }
                 
         }
-        
+        public function delete($ids){
+            if(is_array($ids)){
+                foreach($ids as $value){
+                    $this->db->or_where('AS_id',$value);
+                }
+                $this->db->delete('adsence_style');
+                return $this->db->affected_rows();
+            }
+            else{
+                fb('参数错误，检查输入类型',FirePHP::TRACE);
+                show_error('input parm illegal');
+            }
+        }
         public function get_adsence($info){
             $result = NULL;
             foreach($info as $key=>$value){
@@ -106,6 +119,9 @@
                 }
             }
             return $result;
+        }
+        public function count(){
+            return $this->db->count_all('adsence_style');
         }
         
     }

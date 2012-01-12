@@ -64,6 +64,18 @@
                                 'label' =>'广告名称',
                                 'rules' =>'required|min_length(1)'
                             )
-                       )
+                       ),
+'add_adsence_style'=>array(
+                        array(
+                                'field' =>'name',
+                                'label' =>'广告位名称',
+                                'rules' =>'required|min_length(1)'
+                            ), 
+                        array(
+                                'field' =>'des',
+                                'label' =>'广告位描述',
+                                'rules' =>''
+                            )
+                        ),  
                  );
 ?>

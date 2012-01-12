@@ -68,39 +68,39 @@
         <div>
             <input type="file" name="tmb"/>
         </div>
-        <h5>排序权重(留空表示默认)
-         <?if(isset($product->P_des)):?>
-                (原权重:<?=$product->P_sort?>)
-         <?endif;?>
-        </h5>
         <div>
-            <input type="text" name="sort"/>
-        </div>
-        <h5>首页显示(超过3个按照权重顺序)
-         <?if(isset($product->P_des)):?>
-                (原值:
-             <?if($product->P_index):?>
-                是
-             <?else:?>
-                否
+            <h5>排序权重(留空表示默认)
+             <?if(isset($product->P_des)):?>
+                    (原权重:<?=$product->P_sort?>)
              <?endif;?>
-                )
-         <?endif;?>
-        </h5>
-        <div>
-           <?if(isset($product->P_des)):?>
-            <select name="indexpage_change">
-                <option value="nochange">不做修改</option>
-                <option value="1">首页显示</option>
-                <option value="0">首页不显示</option>
-            </select>
-           <?else:?>    
-            <input type ="checkbox" name="indexpage" />
-           <?endif;?>
+             <input type="text" name="sort"/>
+            </h5>
         </div>
         <div>
-            <input type="submit" value="submit"/>
-            <input type="reset" value="reset"/>
+            <h5>首页显示(超过3个按照权重顺序)
+             <?if(isset($product->P_des)):?>
+                    (原值:
+                 <?if($product->P_index):?>
+                    是
+                 <?else:?>
+                    否
+                 <?endif;?>
+                    )
+             <?endif;?>
+             <?if(isset($product->P_des)):?>
+                <select name="indexpage_change">
+                    <option value="nochange">不做修改</option>
+                    <option value="1">首页显示</option>
+                    <option value="0">首页不显示</option>
+                </select>
+               <?else:?>    
+                <input type ="checkbox" name="indexpage" />
+               <?endif;?>
+            </h5>
+        </div>
+        <div>
+            <input type="submit" value="提交"/>
+            <input type="reset" value="重置"/>
         </div>
         </form>    
     </body>

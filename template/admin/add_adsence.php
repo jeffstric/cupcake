@@ -24,7 +24,7 @@
             (原链接:<?=$adsence->A_url?>)
             <?endif;?>
         </h5>
-        <input type="text" name="url" value="<?=set_value('url')?>"/> 
+        <input type="text" name="url" value="<?=set_value('url')?>" style="width:420px;"/> 
         <h5>广告图片(幻灯片:900px*376px 全局:300px*171px)
             <?if(isset($adsence->A_img)):?>
             <br/>(原图片:<img src="<?=get_U($adsence->A_img)?>"/>)
@@ -35,11 +35,12 @@
             <?if(isset($adsence->A_sort)):?>
             (原权重:<?=$adsence->A_sort?>)
             <?endif;?>
+         <input type="text" name="sort"/>
         </h5>
-        <input type="text" name="sort"/>
+        
         <div>
-            <input type="submit" value="submit"/>
-            <input type="reset" value="reset"/>
+            <input type="submit" value="提交"/>
+            <input type="reset" value="重置"/>
         </div>
         </form>
     </body>    

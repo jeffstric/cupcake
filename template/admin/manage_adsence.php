@@ -35,7 +35,7 @@
                 <tr>
                     <td><?=$value->A_name?></td>
                     <td><?=$value->A_url?></td>
-                    <td><img src="<?=get_U($value->A_img)?>"/></td>
+                    <td><img width="400" height="150" src="<?=get_U($value->A_img)?>"/></td>
                     <td><?=$value->A_sort?></td>
                     <td><?=$value->A_adder?></td>
                     <td><?=date('Y-m-d H-i-s',$value->A_addtime)?></td>
