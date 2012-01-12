@@ -5,20 +5,13 @@
         <script type="text/javascript" src="<?=get_cji('checkbox.js')?>"></script>
     </head>
     <body>
-       <?=form_open(site_url('admin/action'))?>
-            <input type="text" name="object" value="<?=$object?>" hidden="TRUE"/>
+       <?=form_open(site_url('admin/process_delete'))?>
+            <input type="text" name="object" value="product" hidden="TRUE"/>
             <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
              <table border="1">
                 <tr>
-                    <td colspan ="5">
-                        <select name="action">
-                            <option value="">请选择操作</option>
-                            <option value="delete">删除</option>
-                            <option value="update">更新</option>
-                        </select>
-                    </td>
-                    <td colspan ="5">
-                        <input type="submit" value="提交"/>
+                     <td colspan ="5">
+                        亲，删除是不可逆的，你确定一定及其肯定?
                     </td>
                 </tr>
                 <tr>
@@ -31,7 +24,7 @@
                     <th>首页展示</th>
                     <th>添加者</th>
                     <th>添加时间</th>
-                    <th>操作</th>
+                    <th>选择</th>
                 </tr>
                     <?foreach($products as $value):?>
                       <tr>
@@ -51,17 +44,21 @@
                         <td><?=$value->P_adder?></td>
                         <td><?=date('Y-m-d H:i:s',$value->P_addtime)?></td>
                         <td>
-                            <input type="checkbox" class="form_checkbox" value="<?=$value->P_id?>"/>
-                            <div>
-                                <a href="<?=site_url('admin/product_update/'.$value->P_id)?>" >更新</a>
-                            </div>
-                            <div>
-                                <a href="<?=site_url('admin/product_delete/'.$value->P_id)?>" >删除</a> 
-                            </div>
-                            
+                            <input type="checkbox" class="form_checkbox" value="<?=$value->P_id?>" checked="TRUE"/>
                         </td>
                        </tr>
                     <?endforeach;?>
+                       <tr>
+                    <td colspan ="3">
+                        <input type="submit" value="提交"/>
+                    </td>
+                    <td colspan ="3">
+                        <input type="reset" value="重置"/>
+                    </td>
+                    <td colspan ="4">
+                        <a href="<?=site_url('admin/product_manage')?>" >返回</a>
+                    </td>
+                </tr>
              </table>
        </form>
     </body>

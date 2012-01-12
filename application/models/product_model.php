@@ -42,6 +42,22 @@
             }
         }
         /**
+         *  显示指定ID的信息
+         * @param array $ids 
+         * @return array
+         */
+        public function show_ids($ids){
+            if(is_array($ids)){
+                foreach($ids as $value)
+                    $this->db->or_where('P_id',$value);
+                return $this->show();
+            }
+            else{
+                fb('输入类型必须是数组',FirePHP::TRACE);
+                show_error('input parm illegal');
+            }
+        }
+        /**
          * 获得所有商品信息
          */
         public function show(){

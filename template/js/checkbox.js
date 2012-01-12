@@ -13,4 +13,5 @@ $(document).ready(function(){
     function clearCBValue(){
         $('#checkboxValue').val('');
     }
+    addCheckboxValue();
 });  

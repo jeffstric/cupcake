@@ -33,16 +33,18 @@
             }
         }
         /**
-         * 获得指定ID的信息
-         * @param integer $A_id
-         * @return stdClass
+         *  显示指定ID的信息
+         * @param array $ids 
+         * @return array
          */
-        public function select_info($A_id){
-            if(is_numeric($A_id)){
-                return $this->db->where('A_id',$A_id)->get('adsence')->row();
+        public function show_ids($ids){
+            if(is_array($ids)){
+                foreach($ids as $value)
+                    $this->db->or_where('A_id',$value);
+                return $this->show();
             }
             else{
-                fb('参数错误，检查输入类型',FirePHP::TRACE);
+                fb('输入类型必须是数组',FirePHP::TRACE);
                 show_error('input parm illegal');
             }
         }

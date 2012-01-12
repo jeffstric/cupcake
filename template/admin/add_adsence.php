@@ -27,7 +27,7 @@
         <input type="text" name="url" value="<?=set_value('url')?>" style="width:420px;"/> 
         <h5>广告图片(幻灯片:900px*376px 全局:300px*171px)
             <?if(isset($adsence->A_img)):?>
-            <br/>(原图片:<img src="<?=get_U($adsence->A_img)?>"/>)
+            <br/>(原图片:<img width="400px" height="150px" src="<?=get_U($adsence->A_img)?>"/>)
             <?endif;?>
         </h5>
         <input type="file" name="img"/>

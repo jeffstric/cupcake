@@ -54,6 +54,8 @@
                  'C_addtime'=>time(),
                    'C_adder'=>$this->U->U_name
                 );
+                if( is_numeric($this->input->post('parent')) && $this->input->post('parent') > 0 )
+                        $info['C_parent'] = $this->input->post('parent');
                 $info['errors'] = '添加成功，插入ID为'.$this->C_M->add($info);
             }
             $info = $info + array(
@@ -72,11 +74,16 @@
                          );
             $this->load->view('admin/manage_category',$info);
         }
-        protected function category_delete($ids){
+        public function category_delete($ids){
+            if(is_numeric($ids) )
+                $ids = array($ids);
             if(is_array($ids)){
-                $this->load->model('category_model','L_M');
-                $this->L_M->delete($ids);
-                header('Location:'.site_url('admin/category_manage'));
+                $this->load->model('category_model','C_M');
+                $info = array(
+                    'categories'=>$this->C_M->show_ids($ids),
+                                 'C' =>$this->get_category_name()
+                 );
+                $this->load->view('admin/delete_category',$info);
             }
             else{
                 fb('参数类型错误',  FirePHP::TRACE);
@@ -142,10 +149,19 @@
             $this->load->view('admin/manage_product',$info);
         }
         public function product_delete($ids){
+            if(is_numeric($ids) )
+                $ids = array($ids);
             if(is_array($ids)){
+                $cat_name = $this->get_category_name();
                 $this->load->model('product_model','P_M');
-                $this->P_M->delete($ids);
-                header('Location:'.site_url('admin/product_manage'));
+                $products=$this->P_M->show_ids($ids);
+                foreach($products as $value){
+                    $value->P_C_name = $cat_name[$value->P_C_id];
+                }
+                $info = array(
+                      'products'=>$products
+                 );
+                $this->load->view('admin/delete_product',$info);
             }
             else{
                 fb('参数类型错误',  FirePHP::TRACE);
@@ -312,10 +328,14 @@
             $this->load->view('admin/manage_adsence',$info);
         }
         public function adsence_delete($ids){
+            if(is_numeric($ids) )
+                $ids = array($ids);
             if(is_array($ids)){
-                $this->load->model('adsence_model','A_M');
-                $this->A_M->delete($ids);
-                header('Location:'.site_url('admin/adsence_manage'));
+               $this->load->model('adsence_model','A_M');
+               $info = array(
+                'adsences' => $this->A_M->show_ids($ids),
+                );
+                $this->load->view('admin/delete_adsence',$info);
             }
             else{
                 fb('参数类型错误',  FirePHP::TRACE);
@@ -445,15 +465,7 @@
             $this->load->view('admin/add_adsence_style',$info);
         }
         public function adsence_style_delete($ids){
-            if(is_array($ids)){
-                $this->load->model('adsence_style_model','AS_M');
-                $this->AS_M->delete($ids);
-                header('Location:'.site_url('admin/adsence_style_manage'));
-            }
-            else{
-                fb('参数类型错误',  FirePHP::TRACE);
-                show_error('输入类型错误');
-            }
+            $this->process_delete('adsence_style', $ids);
         }
         /***
          * 广告管理结束
@@ -487,6 +499,25 @@
             else{
                 $this->error_show('没有选择操作或者未选择分类',$object.'_manage');
             }
+        }
+         public function process_delete(){
+            if($object == NULL && $ids == NULL){
+                $object = $this->input->post('object');
+                $ids = $this->input->post('checkboxValue');
+            }
+            if(is_string($object)&&  in_array($object, array('product','category','adsence','adsence_style') )){
+                if($ids !=FALSE && is_string($ids)){
+                    $ids = explode(',',$ids);
+                    $model = $object.'_model';
+                    $this->load->model($model,'M');
+                    $this->M->delete($ids);
+                
+                    header('Location:'.site_url('admin/'.$object.'_manage'));
+                }
+            }
+            
+            fb('参数错误',  FirePHP::TRACE);
+            $this->error_show('错误',$object.'_manage');
         }
          /***
          * 公共函数结束

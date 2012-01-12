@@ -10,18 +10,6 @@
         <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
         <table border="1">
             <tr>
-                    <td colspan ="3">
-                    <select name="action">
-                        <option value="">请选择操作</option>
-                        <option value="delete">删除</option>
-                        <option value="update">更新</option>
-                    </select>
-                    </td>
-                    <td colspan ="3">
-                        <input type="submit" value="提交"/>
-                    </td>
-            </tr>
-            <tr>
                 <th>广告位ID</th>
                 <th>广告位名称</th>
                 <th>广告位介绍</th>
@@ -46,7 +34,9 @@
                        <?endforeach;?>
                    <?endif;?>
                 </td>
-                <td><input type="checkbox" class="form_checkbox" value="<?=$value->AS_id?>"/></td> 
+                <td>
+                    <a href="<?=site_url('admin/adsence_style_update/'.$value->AS_id)?>" >更新</a>
+                </td> 
             </tr>
             <?endforeach;?>
          </table>

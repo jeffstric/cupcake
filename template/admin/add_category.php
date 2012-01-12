@@ -25,7 +25,7 @@
             (原父分类:<?=$categories[$category->C_parent]?>)
           <?endif;?>
         </h5>
-        <select name="category">
+        <select name="parent">
                 <option value="">请选择分类</option>
                     <?foreach($categories as $key=>$value):?>
                         <option value="<?=$key?>"><?=$value?></option>

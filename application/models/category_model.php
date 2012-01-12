@@ -38,6 +38,22 @@
             }
         }
         /**
+         *  显示指定ID的信息
+         * @param array $ids 
+         * @return array
+         */
+        public function show_ids($ids){
+            if(is_array($ids)){
+                foreach($ids as $value)
+                    $this->db->or_where('C_id',$value);
+                return $this->show();
+            }
+            else{
+                fb('输入类型必须是数组',FirePHP::TRACE);
+                show_error('input parm illegal');
+            }
+        }
+        /**
          * 获得所有分类信息
          */
         public function show(){
@@ -147,7 +163,7 @@
          *  通过递归获得输入分类下的所有子分类
          * @param int $P_id
          * @param array $result 
-         * @return $array $result
+         * @return $array $result 仅包含子分类ID
          */
         public function child_id($P_id,$result = NULL){
                
@@ -162,19 +178,11 @@
             }
             return $result;
         }
-        /*
-        public function get_menulist($parent_id,&$treelist,$floor=0){
-            $result = $this->db->where('C_parent',$parent_id)->get('category')->result();
-            foreach($result as $value){
-                
-                
-                for($i=0;i<$floor;$i++){
-                    $space.="　";
-                }
-                $treelist[]=array('id'=>$value->C_id,);
-                $this->get_menulist($treelist,$value->C_id, $floor++);
-            }
-        }
+        /**
+         *  递归获得分类 
+         * @param int $parent_id
+         * @param array $treelist
+         * @param array $floor 与show()返回类型相同 
          */
         public function get_menulist($parent_id,&$treelist,$floor = 0){
             if($treelist == NULL)

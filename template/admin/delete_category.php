@@ -6,17 +6,22 @@
         <script type="text/javascript" src="<?=get_cji('checkbox.js')?>"></script>
     </head>
     <body>
-        <?=form_open(site_url('admin/action'))?>
-        <input type="text" name="object" value="<?=$object?>" hidden="TRUE"/>
-        <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
+        <?=form_open(site_url('admin/process_delete'))?>
+        <input type="text" name="object" value="category" hidden="TRUE"/>
+        <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE" />
         <table border="1">
+            <tr>
+                <td colspan ="6">
+                    亲，删除是不可逆的，你确定一定及其肯定?
+                </td>
+            </tr>
             <tr>
                 <th>分类名称</th>
                 <th>分类描述</th>
                 <th>父分类</th>
                 <th>添加者</th>
                 <th>添加时间</th>
-                <th>操作</th>
+                <th>选择</th>
             </tr>
             <?if(isset($categories)):?>
                <?foreach($categories as $value):?> 
@@ -27,22 +32,19 @@
                     <td><?=$value->C_adder?></td>
                     <td><?=date('Y-m-d H:i:s',$value->C_addtime)?></td>
                     <td>
-                        <input type="checkbox" class="form_checkbox" value="<?=$value->C_id?>"/>
-                        <a href="<?=site_url('admin/category_update/'.$value->C_id)?>" >更新</a> 
-                        <a href="<?=site_url('admin/category_delete/'.$value->C_id)?>" >删除</a> 
+                        <input type="checkbox" class="form_checkbox" value="<?=$value->C_id?>" checked="TRUE"/>
                     </td>
                 </tr>
                <?endforeach;?>
                 <tr>
-                    <td colspan ="3">
-                    <select name="action">
-                        <option value="">请选择操作</option>
-                        <option value="delete">删除</option>
-                        <option value="update">更新</option>
-                    </select>
-                    </td>
                     <td colspan ="2">
                         <input type="submit" value="提交"/>
+                    </td>
+                    <td colspan ="2">
+                        <input type="reset" value="重置"/>
+                    </td>
+                    <td colspan ="2">
+                        <a href="<?=site_url('admin/category_manage')?>" >返回</a>
                     </td>
                 </tr>
             <?endif;?>
