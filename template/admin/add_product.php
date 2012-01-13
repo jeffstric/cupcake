@@ -15,39 +15,35 @@
                 <?=$errors?>
             <?endif;?>
         </div>
-        <h5>商品名称
-            <?if(isset($product->P_name)):?>
-                (原名称:<?=$product->P_name?>)
-            <?endif;?>
-        </h5>
+        <h5>商品名称</h5>
         <div>
-            <input type="text" name="name" value="<?=set_value('name')?>"/>
+            <input type="text" name="name" 
+                   value="<?if(isset($product->P_name)):?><?=$product->P_name?><?else:?><?endif;?>"/>
         </div>
-        <h5>商品分类
-            <?if(isset($product->P_C_name)):?>
-                (原分类:<?=$product->P_C_name?>)
-            <?endif;?>
-        </h5>
+        <h5>商品分类</h5>
         <div>
             <select name="category">
-                <option value="">请选择分类</option>
+                <?if(isset($product->P_C_name) && isset($product->P_C_id)):?>
+                    <option value="<?=$product->P_C_id?>"><?=$product->P_C_name?></option>
+               <?else:?>
+                    <option value="">请选择分类</option>
+               <?endif;?>
                 <?foreach($categories as $key=>$value):?>
                     <option value="<?=$key?>"><?=$value?></option>
                 <?endforeach;?>
             </select>
         </div>
         <h5>商品描述</h5>
-        <?if(isset($product->P_des)):?>
-                (原描述:<div><?=$product->P_des?></div>)
-        <?endif;?>
         <div>
             <?php
+                $con = isset($product->P_des)?$product->P_des:'';
+            
                 include_once "./ckeditor/ckeditor.php";
                 $CKEditor = new CKEditor();
                 // Path to the CKEditor directory.
                 $CKEditor->basePath = base_url().'ckeditor/';
                 $CKEditor->config['width'] = 750;
-                $CKEditor->editor("des");
+                $CKEditor->editor("des",$con);
             ?>
 
             </textarea>
@@ -70,32 +66,20 @@
         </div>
         <div>
             <h5>排序权重(留空表示默认)
-             <?if(isset($product->P_des)):?>
-                    (原权重:<?=$product->P_sort?>)
-             <?endif;?>
-             <input type="text" name="sort"/>
+             <input type="text" name="sort" 
+             value="<?if(isset($product->P_sort)):?><?=$product->P_sort?><?else:?><?=set_value('sort')?><?endif;?>"/>
             </h5>
         </div>
         <div>
-            <h5>首页显示(超过3个按照权重顺序)
-             <?if(isset($product->P_des)):?>
-                    (原值:
-                 <?if($product->P_index):?>
-                    是
-                 <?else:?>
-                    否
-                 <?endif;?>
-                    )
-             <?endif;?>
-             <?if(isset($product->P_des)):?>
-                <select name="indexpage_change">
-                    <option value="nochange">不做修改</option>
-                    <option value="1">首页显示</option>
-                    <option value="0">首页不显示</option>
-                </select>
-               <?else:?>    
-                <input type ="checkbox" name="indexpage" />
-               <?endif;?>
+            <h5>首页显示
+                <input type ="checkbox" name="indexpage"  value="on"
+                       <?if(isset($product->P_index) &&$product->P_index ):?>
+                            checked="TRUE"
+                       <?else:?>
+                            <?=set_checkbox('indexpage', 'on'); ?>
+                       <?endif;?>
+                 />
+             (当首页显示的商品数超过3个后，按照权重选取3个)
             </h5>
         </div>
         <div>

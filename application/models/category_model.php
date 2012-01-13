@@ -65,11 +65,11 @@
         public function name_id(){
             return $this->db->select('C_name,C_id')->get('category')->result();
         }
-        
         public function id2name(){
-            $result = $this->name_id();
+            $this->get_menulist(0, $treelist);
+            
             $return = array();
-            foreach($result as $value){
+            foreach($treelist as $value){
                 $return[$value->C_id]= $value->C_name;
             }
             unset ($result);
@@ -84,8 +84,10 @@
                     unset($info['C_adder']);
                 if(isset($info['C_addtime']))
                     unset($info['C_addtime']);
-                if(isset($info['C_parent']) && !is_numeric($info['C_parent']))
-                    unset($info['C_parent']);
+                if(isset($info['C_parent']) ){
+                    if(!is_numeric($info['C_parent']) || $info['C_parent'] == C_id)
+                        unset($info['C_parent']);
+                }
                     
                 if(count($info)>0){
                     $this->db->where('C_id',$C_id)->update('category',$info);
@@ -99,13 +101,38 @@
                 show_error('input parm illegal');
             }
         }
+        public function check_child($C_id,&$db_error){
+            $child = $this->db->select('count(*) as num')->where('C_parent',$C_id)->get('category')->row()->num;
+             if( $child>0){
+                 $db_error = '还有'.$child.'个分类依赖着该分类，请先将它们删除';
+                 return FALSE;
+             }
+             else
+                 return TRUE;    
+        }
+        public function check_product($C_id,&$db_error){
+            $product = $this->db->select('count(*) as num ')->where('P_C_id',$C_id)->get('product')->row()->num;
+            if($product>0){
+                $db_error = '还有'.$product.'个商品属于该分类，请先将它们删除';
+                 return FALSE;
+            }
+            else
+                return TRUE;
+        }
         /**
-         * 删除指定ID的信息
+         *  在确保没有分类和商品依赖改分类的情况下将其删除
+         * @param int $C_id 
+         * @param string $db_error
+         * @return TRUE or FALSE
          */
-        public function delete_info($C_id){
+        public function delete_info($C_id,&$db_error){
             if(is_numeric($C_id)){
+                if(!$this->check_child($C_id, $db_error) )
+                        return FALSE;
+                if(!$this->check_product($C_id, $db_error))
+                        return FALSE;
                 $this->db->where('C_id',$C_id)->delete('category');
-                return $this->db->affected_rows();
+                return TRUE;
             }
             else{
                 fb('参数类型必须是是整数',FirePHP::TRACE);
@@ -117,13 +144,15 @@
          * @param array $ids
          * @return tint 
          */
-        public function delete($ids){
+        public function delete($ids,&$db_error){
+            $result = TRUE;
             if(is_array($ids)){
                 foreach($ids as $value){
-                    if(is_numeric($value))
-                        $this->db->or_where('C_id',$value);
+                    if(is_numeric($value)){
+                        if(!$this->delete_info ($value,$db_error))
+                            return FALSE;
+                    }
                 }
-                $this->db->delete('category');
                 return $this->db->affected_rows();
             }
         }
@@ -150,10 +179,10 @@
         }
         
         public function get_all(){
-            $show =$this->show();
-            foreach($show as $value){
+            $tree = $this->get_menulist(0, $treelist);
+            foreach($treelist as $value){
                 $result[]=array(
-                    'name'=>$value->C_name,
+                    'name'=>str_replace( "&nbsp;", " ",$value->C_name),
                      'url'=>  site_url('cakes/category/'.$value->C_id)
                 );
             }
@@ -190,7 +219,7 @@
             $result = $this->db->where('C_parent',$parent_id)->get('category')->result();
             foreach($result as $value){
                 for($i = 0 ; $i < $floor ; $i++)
-                    $value->C_name='　'.$value->C_name;
+                    $value->C_name='&nbsp;&nbsp;'.$value->C_name;
                 
                 array_push($treelist,$value);
                 

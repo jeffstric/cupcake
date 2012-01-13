@@ -10,18 +10,6 @@
             <input type="text" name="checkboxValue" id="checkboxValue" hidden="TRUE"/>
              <table border="1">
                 <tr>
-                    <td colspan ="5">
-                        <select name="action">
-                            <option value="">请选择操作</option>
-                            <option value="delete">删除</option>
-                            <option value="update">更新</option>
-                        </select>
-                    </td>
-                    <td colspan ="5">
-                        <input type="submit" value="提交"/>
-                    </td>
-                </tr>
-                <tr>
                     <th>产品名称</th>
                     <th>分类</th>
                     <th>产品描述</th>
@@ -51,7 +39,6 @@
                         <td><?=$value->P_adder?></td>
                         <td><?=date('Y-m-d H:i:s',$value->P_addtime)?></td>
                         <td>
-                            <input type="checkbox" class="form_checkbox" value="<?=$value->P_id?>"/>
                             <div>
                                 <a href="<?=site_url('admin/product_update/'.$value->P_id)?>" >更新</a>
                             </div>

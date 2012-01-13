@@ -24,7 +24,7 @@
                     <th>首页展示</th>
                     <th>添加者</th>
                     <th>添加时间</th>
-                    <th>选择</th>
+                    <th>操作</th>
                 </tr>
                     <?foreach($products as $value):?>
                       <tr>

@@ -10,13 +10,13 @@
             <tbody>
                 <tr>
                     <td width="20" valign="top" style="padding-top: 10px;">
-                        <a class="mmac" id="link1"><div>商品</div></a>
+                        <a class="mmac" id="link1"><div>后台</div></a>
 
                         <div class="mmf"></div>
                     </td>
                     <td width="160" valign="top" id="mainct">
                         <div id="ct1">
-                            <!-- Item 2 Strat -->
+                            <!-- Item 1 Strat -->
                             <dl class="bitem"><dt><b>商品管理</b></dt>
                                 <dd id="items1_1" class="sitem" style="display: block;">
                                     <ul class="sitemu">
@@ -31,24 +31,8 @@
                                     </ul>
                                 </dd>
                             </dl>
-                            <!-- Item 2 End -->
-                        </div>
-
-                    </td>
-                </tr>
-
-                <tr>
-                    <td width="26"></td>
-                    <td width="160" valign="top"><img src="<?= admin_cji('idnbgfoot.gif') ?>"></td>
-                </tr>
-                <tr>
-                    <td width="20" valign="top" style="padding-top: 10px;">
-                        <a class="mmac" id="link1"><div>广告</div></a>
-
-                        <div class="mmf"></div>
-                    </td>
-                    <td width="160" valign="top" id="mainct">
-                        <div id="ct1">
+                            <!-- Item 1 End -->
+                            
                             <!-- Item 2 Strat -->
                             <dl class="bitem"><dt><b>广告管理</b></dt>
                                 <dd id="items1_1" class="sitem" style="display: block;">
@@ -65,11 +49,21 @@
                                 </dd>
                             </dl>
                             <!-- Item 2 End -->
+                            
+                            <!-- Item 3 Strat -->
+                            <dl class="bitem"><dt><b>用户管理</b></dt>
+                                <dd id="items1_1" class="sitem" style="display: block;">
+                                    <ul class="sitemu">
+                                        <li><a target="main" href="<?=site_url('admin/pw_change')?>">密码修改</a>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </dl>
+                            <!-- Item 4 End -->
                         </div>
 
                     </td>
                 </tr>
-
 
             </tbody></table>
     </body></html>

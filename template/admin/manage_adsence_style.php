@@ -12,28 +12,22 @@
             <tr>
                 <th>广告位ID</th>
                 <th>广告位名称</th>
-                <th>广告位介绍</th>
-                <th>广告位包含的广告</th>
+                <th>广告位描述</th>
+                <th>描述</th>
+                <th>广告位包涵广告数量</th>
                 <th>添加者</th>
                 <th>添加时间</th>
-                <th>图片展示</th>
-                <th>更新</th>
+                <th>操作</th>
             </tr>
             <?foreach($styles as $key=>$value):?>
             <tr>
                 <td><?=$value->AS_id?></td>
                 <td><?=$value->AS_name?></td>
-                <td><?=$value->AS_des?></td> 
-                <td><?=$value->A_id?></td> 
+                <td><?=$value->AS_keyname?></td>
+                <td><?=$value->AS_des?></td>
+                <td><?=$value->AS_default_num?></td>
                 <td><?=$value->AS_adder?></td> 
                 <td><?=date('Y-m-d H-i-s',$value->AS_addtime)?></td> 
-                <td>
-                   <?if(isset($img->$key)):?> 
-                       <?foreach($img->$key as $V):?>
-                        <img width="100" height="50" src="<?=get_U($V['img'])?>"/>
-                       <?endforeach;?>
-                   <?endif;?>
-                </td>
                 <td>
                     <a href="<?=site_url('admin/adsence_style_update/'.$value->AS_id)?>" >更新</a>
                 </td> 

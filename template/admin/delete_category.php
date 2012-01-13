@@ -15,20 +15,16 @@
                     亲，删除是不可逆的，你确定一定及其肯定?
                 </td>
             </tr>
-            <tr>
-                <th>分类名称</th>
-                <th>分类描述</th>
-                <th>父分类</th>
-                <th>添加者</th>
-                <th>添加时间</th>
-                <th>选择</th>
-            </tr>
             <?if(isset($categories)):?>
                <?foreach($categories as $value):?> 
                 <tr>
                     <td><?=$value->C_name?></td>
                     <td><?=$value->C_des?></td>
-                    <td><?=$C[$value->C_parent]?></td>
+                    <td>
+                        <?if(isset($C[$value->C_parent])):?>
+                            <?=$C[$value->C_parent]?>
+                        <?endif;?>
+                    </td>
                     <td><?=$value->C_adder?></td>
                     <td><?=date('Y-m-d H:i:s',$value->C_addtime)?></td>
                     <td>

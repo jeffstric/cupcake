@@ -10,31 +10,10 @@
         </div>
     </div>
     <div class="container">
-    	<ul class="banner300">
-           <?if(isset($banner->global_ad1)):?>
-             <li>
-              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
-                <a href="<?=$banner->global_ad1['0']['url']?>">
-                   <img src="<?=get_U($banner->global_ad1['0']['img'])?>" alt="<?=$banner->global_ad1['0']['name']?>" />
-                </a>
-             </li>
-           <?endif;?>
-           <?if(isset($banner->global_ad2)):?>
-             <li>
-              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
-                <a href="<?=$banner->global_ad2['0']['url']?>">
-                   <img src="<?=get_U($banner->global_ad2['0']['img'])?>" alt="<?=$banner->global_ad2['0']['name']?>" />
-                </a>
-             </li>
-           <?endif;?>
-           <?if(isset($banner->global_ad3)):?>
-             <li>
-              <!--这里的闪现率暂时不予考虑，全部选取第一张图片-->
-                <a href="<?=$banner->global_ad3['0']['url']?>">
-                   <img src="<?=get_U($banner->global_ad3['0']['img'])?>" alt="<?=$banner->global_ad3['0']['name']?>" />
-                </a>
-             </li>
-           <?endif;?>
+         <ul class="banner300">
+            <?=get_ad('global_ad1')?>
+            <?=get_ad('global_ad2')?>
+            <?=get_ad('global_ad3')?>
          </ul>
         <div id="columnLeft">
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>

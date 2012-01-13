@@ -15,8 +15,12 @@
          */
         public function add($info){
             if(is_array($info) && isset($info['AS_adder'])){
-                $info['A_id'] = trim($info['A_id']);
-                $info['AS_addtime']=time();
+                
+                if(!isset($info['AS_addtime']))
+                    $info['AS_addtime']=time();
+                if(!isset($info['AS_default_num']) || $info['AS_default_num']<1)
+                    $info['AS_default_num'] = 1;
+                
                 $this->db->insert('adsence_style',$info);
                 return $this->db->insert_id();
             }
@@ -115,26 +119,37 @@
                 show_error('input parm illegal');
             }
         }
-        public function get_adsence($info){
-            $result = NULL;
-            foreach($info as $key=>$value){
-                if( is_numeric($value) ){
-                    $this->load->model('adsence_model','A_M');
-                    $A_info =  @$this->select_info($value)->A_id;
-                    if($A_info !=NULL){
-                        $A_id =explode(',',$A_info);
-                        foreach($A_id as $V ){
-                             $this->db->or_where('A_id',$V);
-                        }
-                        $R = $this->db->select('A_id as id,A_img as img,A_name as name,A_url as url')
-                                  ->order_by('A_sort')->get('adsence')
-                                  ->result_array();
-                        
-                        $result->$key = $R;
-                    }
-                }
+        protected function get_adsence_style($key){
+            $row = $this->db->select('AS_id as id,AS_default_num as num')->where('AS_keyname',$key)->get('adsence_style')->row();
+             return $row;
+        }
+        public function get_adsence($key){
+            $row = $this->get_adsence_style($key);
+            $AS_id = $row->id;
+            $limit = $row->num;
+            return  $this->db->select('A_name as name,A_img as img,A_url as url')->where('AS_id',$AS_id)->where('A_active',1)
+                        ->where('A_start <',date('Y:m:d H:i:s',time())) 
+                        ->where('A_end >',date('Y:m:d H:i:s',time()))
+                        ->group_by('A_sort')->limit($limit)
+                        ->get('adsence')->result();
+                    
+        }
+        public function count_adsence($key){
+            $row = $this->get_adsence_style($key);
+            return $row->num;
+        }
+        public function name_id(){
+            return $this->db->select('AS_name,AS_id')->get('adsence_style')->result();
+        }
+        
+        public function id2name(){
+            $result = $this->name_id();
+            $return = array();
+            foreach($result as $value){
+                $return[$value->AS_id]= $value->AS_name;
             }
-            return $result;
+            unset ($result);
+            return $return;
         }
         public function count(){
             return $this->db->count_all('adsence_style');

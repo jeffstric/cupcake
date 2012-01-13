@@ -6,7 +6,6 @@
     class Cakes extends CI_Controller{
         public function __construct() {
             parent::__construct();
-            $this->load->model('adsence_style_model','AS_M');
             $this->load->model('category_model','C_M');
             $this->load->model('product_model','P_M');
         }
@@ -34,10 +33,7 @@
             $info = array_merge($I, 
               array(
                       'category'=>$this->C_M->get_all(),
-                       'menu_on'=>2,
-                        'banner'=>$this->AS_M->get_adsence( 
-         array('global_ad1'=>2,'global_ad2'=>3,'global_ad3'=>3) 
-                                )
+                       'menu_on'=>2
                    ) 
             );
             $this->load->view('header',$info);

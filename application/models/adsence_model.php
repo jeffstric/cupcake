@@ -32,6 +32,16 @@
                 show_error('input parm illegal');
             }
         }
+        public function select_info($id){
+            if(is_numeric($id)){
+                return $this->db->where('A_id',$id)->get('adsence')->row();
+            }
+            else{
+                fb('参数错误，检查输入类型',FirePHP::TRACE);
+                show_error('input parm illegal');
+            }
+                
+        }
         /**
          *  显示指定ID的信息
          * @param array $ids 
