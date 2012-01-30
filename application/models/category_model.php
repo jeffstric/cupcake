@@ -61,10 +61,15 @@
         }
         /**
          * 获得所有分类的名称与ID
-         **/
-        public function name_id(){
+         * @return array
+         */
+        private function name_id(){
             return $this->db->select('C_name,C_id')->get('category')->result();
         }
+        /**
+         * 获得树状的以分类ID为索引，分类名称为值的分类信息
+         * @return type 
+         */
         public function id2name(){
             $this->get_menulist(0, $treelist);
             
@@ -101,7 +106,13 @@
                 show_error('input parm illegal');
             }
         }
-        public function check_child($C_id,&$db_error){
+        /**
+         * 检查是否还有分类奴属于该分类
+         * @param type $C_id
+         * @param string $db_error
+         * @return type 
+         */
+        private function check_child($C_id,&$db_error){
             $child = $this->db->select('count(*) as num')->where('C_parent',$C_id)->get('category')->row()->num;
              if( $child>0){
                  $db_error = '还有'.$child.'个分类依赖着该分类，请先将它们删除';
@@ -110,7 +121,13 @@
              else
                  return TRUE;    
         }
-        public function check_product($C_id,&$db_error){
+        /**
+         * 检查是否还有商品奴属于该分类
+         * @param int $C_id
+         * @param string $db_error
+         * @return bool 
+         */
+        private function check_product($C_id,&$db_error){
             $product = $this->db->select('count(*) as num ')->where('P_C_id',$C_id)->get('product')->row()->num;
             if($product>0){
                 $db_error = '还有'.$product.'个商品属于该分类，请先将它们删除';
@@ -158,6 +175,8 @@
         }
         /**
          * 获得导航信息
+         * @param int $C_id
+         * @return array 
          */
         public function get_nav($C_id){
             if(is_numeric($C_id)){
@@ -177,8 +196,12 @@
                 show_error('input parm illegal');
             }
         }
-        
+        /**
+         * 获得分类的树状结构
+         * @return array 
+         */
         public function get_all(){
+            $result = array();
             $tree = $this->get_menulist(0, $treelist);
             foreach($treelist as $value){
                 $result[]=array(

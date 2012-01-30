@@ -20,9 +20,11 @@
         	<div class="infoBoxHeading"><img src="<?=get_cji('lcate.gif')?>" /></div>
             <div class="infoBoxContents">
             	<ul>
-                  <?foreach($category as $value):?> 
-                    <li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
-                  <?endforeach;?>
+                  <?if(isset($category) &&count($category)>0):?>
+                      <?foreach($category as $value):?> 
+                        <li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+                      <?endforeach;?>
+                    <?endif;?>
                 </ul>
             </div>
         </div>

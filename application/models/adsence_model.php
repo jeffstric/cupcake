@@ -32,6 +32,11 @@
                 show_error('input parm illegal');
             }
         }
+        /**
+         * 获得指定ID的信息
+         * @param int $id
+         * @return stdclass
+         */
         public function select_info($id){
             if(is_numeric($id)){
                 return $this->db->where('A_id',$id)->get('adsence')->row();

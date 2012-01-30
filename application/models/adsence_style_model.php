@@ -106,6 +106,11 @@
             }
                 
         }
+        /**
+         * 删除一个或多个ID信息
+         * @param array $ids
+         * @return int
+         */
         public function delete($ids){
             if(is_array($ids)){
                 foreach($ids as $value){
@@ -119,10 +124,20 @@
                 show_error('input parm illegal');
             }
         }
-        protected function get_adsence_style($key){
+        /**
+         * 获得制定索引的广告位ID与广告位数量信息
+         * @param string $key
+         * @return array 
+         */
+        private function get_adsence_style($key){
             $row = $this->db->select('AS_id as id,AS_default_num as num')->where('AS_keyname',$key)->get('adsence_style')->row();
              return $row;
         }
+        /**
+         * 获得指定索引的广告位广告信息
+         * @param string $key
+         * @return array 
+         */
         public function get_adsence($key){
             $row = $this->get_adsence_style($key);
             $AS_id = $row->id;
@@ -132,16 +147,19 @@
                         ->where('A_end >',date('Y:m:d H:i:s',time()))
                         ->group_by('A_sort')->limit($limit)
                         ->get('adsence')->result();
-                    
+            
         }
-        public function count_adsence($key){
-            $row = $this->get_adsence_style($key);
-            return $row->num;
-        }
-        public function name_id(){
+        /**
+         * 获得广告位名称与广告位ID组成的数组
+         * @return array
+         */
+        private function name_id(){
             return $this->db->select('AS_name,AS_id')->get('adsence_style')->result();
         }
-        
+        /**
+         * 获得由广告位ID作为索引，名称作为值的数组
+         * @return array
+         */
         public function id2name(){
             $result = $this->name_id();
             $return = array();
@@ -151,6 +169,10 @@
             unset ($result);
             return $return;
         }
+        /**
+         * 计算广告位数量
+         * @return int 
+         */
         public function count(){
             return $this->db->count_all('adsence_style');
         }

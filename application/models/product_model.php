@@ -42,7 +42,7 @@
             }
         }
         /**
-         *  显示指定ID的信息
+         *  显示一个或多个指定ID的信息
          * @param array $ids 
          * @return array
          */
@@ -146,6 +146,11 @@
                show_error('input parm illegal'); 
             }
         }
+        /**
+         * 删除多个商品信息
+         * @param array $ids
+         * @return int 
+         */
         public function delete($ids){
             if(is_array($ids)){
                 foreach($ids as $value){
@@ -157,7 +162,9 @@
             }
         }
         /**
-         * 
+         *  获得针对ID的商品信息
+         * @param type $P_id
+         * @return type 
          */
         public function product_show($P_id){
             if(is_numeric($P_id)){
@@ -198,13 +205,19 @@
             }
         }
         /**
-         * 获得产品的页数 9个产品一页 
+         * 获得针对分类ID的产品的页数  （9个产品为一页） 
+         * @param int $P_C_id
+         * @return int 
          */
         public function page_num($P_C_id = 0){
             if(is_numeric($P_C_id) && $P_C_id > 0)
                 $this->db->where('P_C_id',$P_C_id);
             return floor(($this->db->count_all_results('product')-1)/9)+1;
         }
+        /**
+         * 获得商品最高的ID值（添加商品时sort需要用到这个函数）
+         * @return int
+         */
         public function max_id(){
             return $this->db->select_max('P_id')->get('product')->row()->P_id;
         }

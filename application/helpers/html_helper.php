@@ -60,13 +60,21 @@ function get_flash($name = 'flash'){
     $CI = &get_instance();
     $CI->load->model('adsence_style_model');
     $result = $CI->adsence_style_model->get_adsence($name);
+    if($result == NULL){
+        $tmp->url='#';
+        $tmp->img='1.jpg';
+        $tmp->name='FML:广告已过期';
+        $result = array(
+            $tmp
+        );
+    }
     $html ='<div id="bigp"><div class="bigpin"><div id="gallery"><div id="slides">';
     foreach($result as $value){
                        $html.=' <div class="slide"><a href="'.$value->url.'" target="_blank"><img src="'.
                                get_U($value->img).'" alt="'.$value->name.'" /></a></div>';
     }
     $html.='</div><div id="flash_menu"><ul><li class="fbar">&nbsp;</li>';
-    $num = $CI->adsence_style_model->count_adsence($name);
+    $num = count($result);
     for($i = 0 ; $i < $num ; $i++){
         $html.='<li class="menuItem"><a href=""><img src="'.get_cji('thumb_about.png').'"/></a></li>';
     }
@@ -77,6 +85,11 @@ function get_ad($name){
     $CI = &get_instance();
     $CI->load->model('adsence_style_model');
     $result = array_pop($CI->adsence_style_model->get_adsence($name));
+    if($result == NULL){
+       $result->url='#';
+       $result->img='4.gif';
+       $result->name='FML:广告已过期';
+    }
     $html='<li><a href="'.$result->url.'"><img src="'.get_U($result->img).'" alt="'.$result->name.'" /></a></li>';
     return $html;
 }
